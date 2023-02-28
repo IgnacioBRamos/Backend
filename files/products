@@ -1,0 +1,20 @@
+[
+	{
+		"title": "Pala",
+		"description": "fuerte",
+		"price": 100,
+		"thumbnail": "asdasd",
+		"code": 400,
+		"stock": 10,
+		"id": 1
+	},
+	{
+		"title": "mancuerna",
+		"description": "fuerte",
+		"price": 100,
+		"thumbnail": "asdasd",
+		"code": 400,
+		"stock": 10,
+		"id": 2
+	}
+]
