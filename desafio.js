@@ -38,24 +38,28 @@ class ProductManager{
         products.push(product);
 
         await fs.promises.writeFile(this.path,JSON.stringify(products,null,"\t"))
+        return "Product Added"
     }
 
     getProductsById = async (productId)=>{
         const products = await this.getProducts()
         const event = products.find((product)=>product.id=== productId)
         if(!event){
-            return "Not found"
+            return "Product Not found"
         }
         return event
     }
 
     deleteProduct = async (productId)=>{
         const products = await this.getProducts()
-        const result = await products.filter(product=> product.id !== productId)
-        if(result){
+        const event = await products.find((product)=>product.id === productId)
+        if(event){
+            const result = await products.filter(product=> product.id !== productId)
+            await fs.promises.writeFile(this.path,JSON.stringify(result,null,"\t"))
+            return "Product deleted"
+        }else{
             return "Product Not Found"
         }
-        await fs.promises.writeFile(this.path,JSON.stringify(result,null,"\t"))
     } 
 
     updateProduct = async (productId,title,description,price,thumbnail,code,stock)=>{
@@ -76,7 +80,7 @@ class ProductManager{
             }
             products[position] = productoEditado
             await fs.promises.writeFile(this.path,JSON.stringify(products,null,"\t"))
-            return
+            return "Product Updated"
         }else{
             return "Product Not Found"
         }
@@ -98,7 +102,7 @@ const env= async()=>{
         description:"fuerte",
         price: 100,
         thumbnail:'asdasd',
-        code: 400,
+        code: 300,
         stock:10
     }
     
@@ -107,9 +111,9 @@ const env= async()=>{
     //console.log(await productManager.getProducts())
     //console.log(await productManager.getProductsById(2))
     
-    //console.log(await productManager.deleteProduct(5))
+    //console.log(await productManager.deleteProduct(3))
     
-    //console.log(await productManager.updateProduct(6,"Nuevo titulo",'Espero que funcione',300))
+    //console.log(await productManager.updateProduct(2,"Nuevo titulo",'Espero que funcione',500))
     //console.log( await productManager.getProducts())
 }
 
