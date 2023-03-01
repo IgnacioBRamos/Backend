@@ -9,9 +9,9 @@
 		"id": 1
 	},
 	{
-		"title": "mancuerna",
-		"description": "fuerte",
-		"price": 100,
+		"title": "Mancuerna",
+		"description": "Pesada",
+		"price": 200,
 		"thumbnail": "asdasd",
 		"code": 300,
 		"stock": 10,

@@ -1,8 +1,5 @@
 import fs from "fs";
 
-
-
-
 class ProductManager{
     constructor(){
         this.path = "./files/products"
@@ -38,7 +35,7 @@ class ProductManager{
         products.push(product);
 
         await fs.promises.writeFile(this.path,JSON.stringify(products,null,"\t"))
-        return "Product Added"
+        return products
     }
 
     getProductsById = async (productId)=>{
@@ -56,7 +53,7 @@ class ProductManager{
         if(event){
             const result = await products.filter(product=> product.id !== productId)
             await fs.promises.writeFile(this.path,JSON.stringify(result,null,"\t"))
-            return "Product deleted"
+            return result
         }else{
             return "Product Not Found"
         }
@@ -80,7 +77,7 @@ class ProductManager{
             }
             products[position] = productoEditado
             await fs.promises.writeFile(this.path,JSON.stringify(products,null,"\t"))
-            return "Product Updated"
+            return products
         }else{
             return "Product Not Found"
         }
@@ -102,18 +99,18 @@ const env= async()=>{
         description:"fuerte",
         price: 100,
         thumbnail:'asdasd',
-        code: 300,
+        code: 700,
         stock:10
     }
     
-    console.log(await productManager.addProduct(product))
+    //console.log(await productManager.addProduct(product))
     
     //console.log(await productManager.getProducts())
     //console.log(await productManager.getProductsById(2))
     
-    //console.log(await productManager.deleteProduct(3))
+    //console.log(await productManager.deleteProduct(4))
     
-    //console.log(await productManager.updateProduct(2,"Nuevo titulo",'Espero que funcione',500))
+    console.log(await productManager.updateProduct(2,"Mancuerna",'Pesada',200))
     //console.log( await productManager.getProducts())
 }
 
