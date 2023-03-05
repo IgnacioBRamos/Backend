@@ -1,4 +1,12 @@
 import fs from "fs";
+import express from "express";
+
+
+const app = express();
+
+
+
+
 
 class ProductManager{
     constructor(){
@@ -89,6 +97,36 @@ class ProductManager{
 
 const productManager = new ProductManager()
 
+
+
+
+app.get("/products",async(req,res)=>{
+    let limit = parseInt(req.query.limit)
+    let productos = await productManager.getProducts()
+    let num = productos.length - limit
+    if(!limit)  return res.send(await productManager.getProducts());
+    for(let i=0; i< num; i++){
+        await productos.pop()
+    }
+    res.send(productos)
+})
+
+
+app.get("/products/:pid",async(req,res)=>{
+    let idProduct = parseInt(req.params.pid)
+    res.send(await productManager.getProductsById(idProduct))
+})
+
+app.listen(8080,()=>{
+    console.log("Servidor arriba del  puerto 8080")
+})
+
+
+
+
+
+
+
 const env= async()=>{
 
     // console.log(await productManager.getProducts())
@@ -110,7 +148,7 @@ const env= async()=>{
     
     //console.log(await productManager.deleteProduct(4))
     
-    console.log(await productManager.updateProduct(2,"Mancuerna",'Pesada',200))
+    console.log(await productManager.updateProduct(2,"Mancuerna",'Pesada',700))
     //console.log( await productManager.getProducts())
 }
 
