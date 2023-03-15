@@ -1,38 +1,15 @@
 [
 	{
-		"title": "Pala",
-		"description": "fuerte",
-		"price": 100,
-		"thumbnail": "asdasd",
-		"code": 400,
-		"stock": 10,
+		"title": "pala",
+		"description": "Pesada",
+		"price": "200",
+		"code": "rer20",
+		"category": "nose",
+		"stock": "10",
+		"status": true,
+		"thumbnails": [
+			"http://localhost:8080/images/1678922295269-capuccino.jpg"
+		],
 		"id": 1
-	},
-	{
-		"title": "Mancuerna",
-		"description": "Pesada",
-		"price": 700,
-		"thumbnail": "asdasd",
-		"code": 300,
-		"stock": 10,
-		"id": 2
-	},
-	{
-		"title": "Mancuerna",
-		"description": "Pesada",
-		"price": 700,
-		"thumbnail": "asdasd",
-		"code": 500,
-		"stock": 10,
-		"id": 3
-	},
-	{
-		"title": "Mancuerna",
-		"description": "Pesada",
-		"price": 700,
-		"thumbnail": "asdasd",
-		"code": 600,
-		"stock": 10,
-		"id": 4
 	}
 ]

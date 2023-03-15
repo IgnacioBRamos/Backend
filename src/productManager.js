@@ -27,22 +27,21 @@ export class ProductManager{
         try{
             const products = await this.getProducts()
             const codeExist = products.find((event)=>event.code === product.code)
-            if(!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock){
+            if(!product.title || !product.description || !product.price || !product.code || !product.thumbnails || !product.category || !product.stock){
                 return 'Error: all fields are mandatory'
             }
             if(codeExist){
                 
                 return `Error: the code ${product.code} for the product already exists`
             }
-            if(products.length === 0){
-                product.id=1
-            }else{
-                product.id = products[products.length-1].id+1;
-            }
+            products.length === 0
+                ? product.id=1
+                : product.id = products[products.length-1].id+1;
+            
             products.push(product);
     
             await fs.promises.writeFile(this.path,JSON.stringify(products,null,"\t"))
-            return products
+            
         }
         catch(error){
             console.error(error)
