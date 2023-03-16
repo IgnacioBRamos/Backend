@@ -9,9 +9,9 @@ export class ProductManager{
     getProducts = async()=>{
         try{
             if (fs.existsSync(this.path)){
-                const data = await fs.promises.readFile(this.path,"utf-8")
-                const result = JSON.parse(data)
-                return result
+                    const data = await fs.promises.readFile(this.path,"utf-8")
+                    const result = JSON.parse(data)
+                    return result
             }
             else{
                 return []
@@ -23,17 +23,22 @@ export class ProductManager{
     }
 
 
-    addProduct=async(product)=>{
-        try{
+    addProduct=async(product,filename)=>{
+       
             const products = await this.getProducts()
             const codeExist = products.find((event)=>event.code === product.code)
-            if(!product.title || !product.description || !product.price || !product.code || !product.thumbnails || !product.category || !product.stock){
-                return 'Error: all fields are mandatory'
+            if(!product.title || !product.description || !product.price || !product.code || !product.category || !product.stock){
+                throw 'Error: all fields are mandatory'
             }
+            if (!filename) {
+                throw "No se pudo cargar el archivo"
+              }
             if(codeExist){
-                
-                return `Error: the code ${product.code} for the product already exists`
+                throw `Error: the code ${product.code} for the product already exists`
             }
+            product.status = true
+            product.thumbnails =[]
+            product.thumbnails.push(`http://localhost:8080/images/${filename}`)
             products.length === 0
                 ? product.id=1
                 : product.id = products[products.length-1].id+1;
@@ -42,68 +47,44 @@ export class ProductManager{
     
             await fs.promises.writeFile(this.path,JSON.stringify(products,null,"\t"))
             
-        }
-        catch(error){
-            console.error(error)
-        }
     }
 
     getProductsById = async (productId)=>{
-        try{
             const products = await this.getProducts()
             const event = products.find((product)=>product.id=== productId)
             if(!event){
-                return "Product Not found"
+                throw "Product Not found"
             }
             return event
-        }
-        catch(error){
-            console.error(error)
-        }
     }
 
     deleteProduct = async (productId)=>{
-        try{
             const products = await this.getProducts()
-            const event = await products.find((product)=>product.id === productId)
-            if(event){
-                const result = await products.filter(product=> product.id !== productId)
-                await fs.promises.writeFile(this.path,JSON.stringify(result,null,"\t"))
-                return result
-            }else{
-                return "Product Not Found"
-            }
-        }
-        catch(error){
-            console.error(error)
-        }
+            await this.getProductsById(productId)
+            const result = await products.filter(product=> product.id !== productId)
+            await fs.promises.writeFile(this.path,JSON.stringify(result,null,"\t"))
     } 
 
-    updateProduct = async (productId,title,description,price,thumbnail,code,stock)=>{
-        try{
-            const products = await this.getProducts()
-            const event = await products.find((product)=>product.id === productId)
+    updateProduct = async (productId,changes)=>{
+    
+        const products = await this.getProducts()
+        const event = await products.find((product)=>product.id === productId)
 
-            if (event){
-                const position =  products.indexOf(event)
-                const productoEditado={
-                    ...event,
-                    title: title ||event.title,
-                    description: description || event.description,
-                    price: price || event.price,
-                    thumbnail: thumbnail || event.thumbnail,
-                    code: code|| event.code,
-                    stock: stock || event.stock,
-                    id: event.id
-                }
-                products[position] = productoEditado
-                await fs.promises.writeFile(this.path,JSON.stringify(products,null,"\t"))
-                return products
-            }else{
-                return "Product Not Found"
-            }
-        }catch(error){
-            console.error(error)
+        if(changes.id){
+            throw "You can not update Id"
         }
+        if (event){
+            const position =  products.indexOf(event)
+            const productoEditado={
+                ...event,
+                ...changes
+            }
+            products[position] = productoEditado
+            await fs.promises.writeFile(this.path,JSON.stringify(products,null,"\t"))
+            return products
+        }else{
+            throw "Product Not Found"
+        }
+       
     }
 }
