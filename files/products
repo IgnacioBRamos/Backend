@@ -3,12 +3,12 @@
 		"title": "pala",
 		"description": "Pesada",
 		"price": "200",
-		"code": "Leopoldo",
+		"code": "awt40",
 		"category": "nose",
 		"stock": "10",
 		"status": true,
 		"thumbnails": [
-			"http://localhost:8080/images/1678922295269-capuccino.jpg"
+			"http://localhost:8080/images/1678987494651-capuccino.jpg"
 		],
 		"id": 1
 	},
@@ -16,12 +16,12 @@
 		"title": "pala",
 		"description": "Pesada",
 		"price": "200",
-		"code": "rer20",
+		"code": "5003",
 		"category": "nose",
 		"stock": "10",
 		"status": true,
 		"thumbnails": [
-			"http://localhost:8080/images/1678977912484-capuccino.jpg"
+			"http://localhost:8080/images/1678987503102-capuccino.jpg"
 		],
 		"id": 2
 	},
@@ -29,12 +29,12 @@
 		"title": "pala",
 		"description": "Pesada",
 		"price": "200",
-		"code": "awt40",
+		"code": "530gfs",
 		"category": "nose",
 		"stock": "10",
 		"status": true,
 		"thumbnails": [
-			"http://localhost:8080/images/1678978459376-capuccino.jpg"
+			"http://localhost:8080/images/1678987509409-capuccino.jpg"
 		],
 		"id": 3
 	}

@@ -6,8 +6,7 @@ export class ProductManager{
         this.path = "./files/products"
     }
 
-    getProducts = async()=>{
-        try{
+    getProducts = async(limit)=>{
             if (fs.existsSync(this.path)){
                     const data = await fs.promises.readFile(this.path,"utf-8")
                     const result = JSON.parse(data)
@@ -16,10 +15,6 @@ export class ProductManager{
             else{
                 return []
             }
-        }
-        catch(error){
-            console.error(error)
-        }
     }
 
 

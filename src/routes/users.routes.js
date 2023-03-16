@@ -9,16 +9,20 @@ const productManager = new ProductManager()
 
 
 router.get("/",async(req,res)=>{
+    try{
         let products = await productManager.getProducts()
         let limit = parseInt(req.query.limit)
         if(products.length ===0){
-            return res
-            .status(404)
-            .send({status:"Error",message:"There are not products registered"})
+            throw"There are not products registered"
         }
         if(!limit)  return res.status(200).send({status:"OK",message:products})
-        const otro = products.filter(el=> el.id<=limit)
-        return res.status(200).send({status:"OK",message:otro})
+        const limitProducts = products.filter(el=> el.id<=limit)
+        return res.status(200).send({status:"OK",message:limitProducts})
+    }catch(error){
+        return res
+            .status(404)
+            .send({status:"Error",message: error})
+    }
 
 })
 
@@ -37,7 +41,7 @@ router.post("/", uploader.single("thumbnails"),async(req,res)=>{
     let product = req.body
     try{
         await productManager.addProduct(product,filename)
-        return res.status(201).send({status:"Success",message:"User created"})
+        return res.status(201).send({status:"Success",message:"Product created"})
     }catch(error){
         res.status(400).send({ status:"Error",message: error })
     }
@@ -63,7 +67,7 @@ router.delete("/:id",async(req,res)=>{
         await productManager.deleteProduct(productId)
         return res
         .status(200)
-        .send({status:"Success",message:"User successfuly deleted"})
+        .send({status:"Success",message:"Product successfuly deleted"})
     }catch(error){
         res.status(404).send({ status:"Error",message: error })
     }
