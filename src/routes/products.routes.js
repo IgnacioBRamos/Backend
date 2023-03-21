@@ -10,14 +10,10 @@ const productManager = new ProductManager()
 
 router.get("/",async(req,res)=>{
     try{
-        let products = await productManager.getProducts()
         let limit = parseInt(req.query.limit)
-        if(products.length ===0){
-            throw"There are not products registered"
-        }
-        if(!limit)  return res.status(200).send({status:"OK",message:products})
-        const limitProducts = products.filter(el=> el.id<=limit)
-        return res.status(200).send({status:"OK",message:limitProducts})
+        let products = await productManager.getProducts(limit)
+        return res.status(200).send({status:"OK",message:products})
+        
     }catch(error){
         return res
             .status(404)

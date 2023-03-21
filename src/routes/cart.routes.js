@@ -1,6 +1,4 @@
 import {Router} from "express"
-import fs from "fs"
-import { ProductManager } from "../productManager.js"
 import { CartManager } from "../cartManager.js"
 
 

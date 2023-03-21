@@ -1,4 +1,7 @@
 import fs from "fs";
+import socket from "./socket.js";
+
+
 
 
 export class ProductManager{
@@ -10,7 +13,12 @@ export class ProductManager{
             if (fs.existsSync(this.path)){
                     const data = await fs.promises.readFile(this.path,"utf-8")
                     const result = JSON.parse(data)
-                    return result
+                    if(result.length ===0){
+                        throw "There are not products registered"
+                    }
+                    if(!limit)  return result
+                    const limitProducts = result.filter(el=> el.id<=limit)
+                    return limitProducts
             }
             else{
                 return []
@@ -39,8 +47,8 @@ export class ProductManager{
                 : product.id = products[products.length-1].id+1;
             
             products.push(product);
-    
             await fs.promises.writeFile(this.path,JSON.stringify(products,null,"\t"))
+            socket.io.emit("productAdded",products)
             
     }
 
@@ -58,6 +66,7 @@ export class ProductManager{
             await this.getProductsById(productId)
             const result = await products.filter(product=> product.id !== productId)
             await fs.promises.writeFile(this.path,JSON.stringify(result,null,"\t"))
+            socket.io.emit("productAdded",result)
     } 
 
     updateProduct = async (productId,changes)=>{
@@ -82,4 +91,5 @@ export class ProductManager{
         }
        
     }
+
 }
