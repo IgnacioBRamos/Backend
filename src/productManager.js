@@ -33,15 +33,22 @@ export class ProductManager{
             if(!product.title || !product.description || !product.price || !product.code || !product.category || !product.stock){
                 throw 'Error: all fields are mandatory'
             }
-            if (!filename) {
-                throw "No se pudo cargar el archivo"
-              }
             if(codeExist){
                 throw `Error: the code ${product.code} for the product already exists`
             }
+
+            product.thumbnails = []
+
+            if (!filename) {
+                throw "No se pudo cargar el archivo"
+              }else{
+                filename.forEach(file => {
+                    const imgUrl = `http://localhost:8080/images/${file.filename}`
+                    product.thumbnails.push(imgUrl)
+                });
+              }
             product.status = true
-            product.thumbnails =[]
-            product.thumbnails.push(`http://localhost:8080/images/${filename}`)
+            
             products.length === 0
                 ? product.id=1
                 : product.id = products[products.length-1].id+1;
@@ -66,7 +73,6 @@ export class ProductManager{
             await this.getProductsById(productId)
             const result = await products.filter(product=> product.id !== productId)
             await fs.promises.writeFile(this.path,JSON.stringify(result,null,"\t"))
-            socket.io.emit("productAdded",result)
     } 
 
     updateProduct = async (productId,changes)=>{

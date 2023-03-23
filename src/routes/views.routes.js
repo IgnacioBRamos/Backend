@@ -22,8 +22,9 @@ router.get("/pruebaproducts",async(req,res)=>{
 })
 
 
-router.get("/realTimeProducts",(req,res)=>{
-    res.render("realTimeProducts",{})
+router.get("/realTimeProducts",async(req,res)=>{
+    let products = await productManager.getProducts()
+    res.render("realTimeProducts",{products})
 })
 
 

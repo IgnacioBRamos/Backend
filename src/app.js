@@ -22,17 +22,6 @@ const httpServer = app.listen(8080,()=>{
 })
 
 
-// const socketServert = new Server(httpServer)
-
-// socketServert.on('connection',socket=>{
-//     console.log("Nuevo cliente conectado")
-//     socket.on('message',data=>{
-//         console.log(data)
-//     })
-//     socket.emit("message2","Buen Dia")
-// })
-
-
 
 
 socket.connect(httpServer)

@@ -32,8 +32,8 @@ router.get("/:pid",async(req,res)=>{
         res.status(404).send({ status:"Error",message: error })
     }
 })
-router.post("/", uploader.single("thumbnails"),async(req,res)=>{    
-    const filename = req.file.filename;
+router.post("/", uploader.array("thumbnails",5),async(req,res)=>{    
+    const filename = req.files;
     let product = req.body
     try{
         await productManager.addProduct(product,filename)

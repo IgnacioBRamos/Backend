@@ -1,54 +1,67 @@
 [
 	{
-		"title": "pala",
+		"title": "Capuccino",
 		"description": "Pesada",
 		"price": "200",
-		"code": "awt40",
+		"code": "580fof1",
 		"category": "nose",
 		"stock": "10",
-		"status": true,
 		"thumbnails": [
-			"http://localhost:8080/images/1678987494651-capuccino.jpg"
+			"http://localhost:8080/images/1679516413691-capuccino.jpg"
 		],
+		"status": true,
 		"id": 1
 	},
 	{
 		"title": "pala",
 		"description": "Pesada",
 		"price": "200",
-		"code": "5003",
+		"code": "580fof5",
 		"category": "nose",
 		"stock": "10",
-		"status": true,
 		"thumbnails": [
-			"http://localhost:8080/images/1678987503102-capuccino.jpg"
+			"http://localhost:8080/images/1679516474571-capuccino.jpg"
 		],
+		"status": true,
 		"id": 2
 	},
 	{
 		"title": "pala",
 		"description": "Pesada",
 		"price": "200",
-		"code": "530gfs",
+		"code": "580fof9",
 		"category": "nose",
 		"stock": "10",
-		"status": true,
 		"thumbnails": [
-			"http://localhost:8080/images/1678987509409-capuccino.jpg"
+			"http://localhost:8080/images/1679521626242-capuccino.jpg"
 		],
+		"status": true,
 		"id": 3
 	},
 	{
-		"title": "pala",
-		"description": "Pesada",
+		"title": "capuccino",
+		"description": "dulce",
 		"price": "200",
-		"code": "580fof8",
+		"code": "580fof7",
 		"category": "nose",
 		"stock": "10",
-		"status": true,
 		"thumbnails": [
-			"http://localhost:8080/images/1679415426446-capuccino.jpg"
+			"http://localhost:8080/images/1679533430529-capuccino.jpg"
 		],
+		"status": true,
 		"id": 4
+	},
+	{
+		"title": "capuccino",
+		"description": "dulce",
+		"price": "200",
+		"code": "580fof6",
+		"category": "nose",
+		"stock": "10",
+		"thumbnails": [
+			"http://localhost:8080/images/1679534609921-capuccino.jpg"
+		],
+		"status": true,
+		"id": 5
 	}
 ]
