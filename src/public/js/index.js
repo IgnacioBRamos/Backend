@@ -32,4 +32,19 @@ socket.on("productDeleted", (productIndex) => {
 
 
 
+  socket.on("productEdited", (productIndex,editedProduct) => {
+    console.log(productIndex)
+    const idProduct = productos.children[productIndex]
+    let productEdited = document.createElement("div")
+    productEdited.innerHTML = `
+            <p>${editedProduct.title}</p>
+            <p>${editedProduct.description}</p>
+            <p>${editedProduct.price}</p>       
+            `
+
+    productos.replaceChild(productEdited,idProduct);
+  })
+
+
+
  

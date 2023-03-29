@@ -2,7 +2,7 @@
 	{
 		"title": "capuccino",
 		"description": "suave y dulce",
-		"price": "300",
+		"price": "400",
 		"code": "123h43",
 		"category": "asd",
 		"stock": "12",
@@ -11,5 +11,18 @@
 		],
 		"status": true,
 		"id": 1
+	},
+	{
+		"title": "capuccino",
+		"description": "suave y dulce",
+		"price": "400",
+		"code": "123h45",
+		"category": "asd",
+		"stock": "12",
+		"thumbnails": [
+			"http://localhost:8080/images/1680129438313-capuccino.jpg"
+		],
+		"status": true,
+		"id": 2
 	}
 ]

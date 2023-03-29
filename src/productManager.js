@@ -81,6 +81,7 @@ export class ProductManager{
     
         const products = await this.getProducts()
         const event = await products.find((product)=>product.id === productId)
+        const index = products.findIndex(product=> product.id === productId)
 
         if(changes.id){
             throw "You can not update Id"
@@ -93,6 +94,7 @@ export class ProductManager{
             }
             products[position] = productoEditado
             await fs.promises.writeFile(this.path,JSON.stringify(products,null,"\t"))
+            socket.io.emit("productEdited", index,productoEditado)
             return products
         }else{
             throw "Product Not Found"
