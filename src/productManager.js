@@ -71,8 +71,10 @@ export class ProductManager{
     deleteProduct = async (productId)=>{
             const products = await this.getProducts()
             await this.getProductsById(productId)
+            const index = products.findIndex(product=> product.id === productId)
             const result = await products.filter(product=> product.id !== productId)
             await fs.promises.writeFile(this.path,JSON.stringify(result,null,"\t"))
+            socket.io.emit("productDeleted", index)
     } 
 
     updateProduct = async (productId,changes)=>{
@@ -95,7 +97,5 @@ export class ProductManager{
         }else{
             throw "Product Not Found"
         }
-       
     }
-
 }
