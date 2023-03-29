@@ -8,24 +8,21 @@ socket.on("message2",data=>{
 
 
 
-const productos = document.getElementsByClassName("productos")[0];
+const productos = document.getElementById("productos")
 
 
 
 
 socket.on("productAdded",data=>{
-
-
-    data.forEach(element => {    
             let productCard = document.createElement("div")
             productCard.innerHTML=`
-                <img src=${element.thumbnails} alt="">
-                <h1>ID:${element.id}</h1>
-                <h2>${element.title}</h2>
-                <p>${element.description}</p>
-                <h5>${element.code}</h5>
-                <h6>Precio ARS$${element.price}</h6>        
+                <img src=${data.thumbnails} alt="">
+                <h1>ID:${data.id}</h1>
+                <h2>${data.title}</h2>
+                <p>${data.description}</p>
+                <h5>${data.code}</h5>
+                <h6>Precio ARS$${data.price}</h6>        
             `
-            productos.append(productCard)
-        });
+            productos.appendChild(productCard)
+        
 })

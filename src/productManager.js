@@ -55,7 +55,7 @@ export class ProductManager{
             
             products.push(product);
             await fs.promises.writeFile(this.path,JSON.stringify(products,null,"\t"))
-            socket.io.emit("productAdded",products)
+            socket.io.emit("productAdded",product)
             
     }
 
