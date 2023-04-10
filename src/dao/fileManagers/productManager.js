@@ -1,5 +1,5 @@
 import fs from "fs";
-import socket from "./socket.js";
+import socket from "../../socket.js";
 
 
 
@@ -57,15 +57,6 @@ export class ProductManager{
             await fs.promises.writeFile(this.path,JSON.stringify(products,null,"\t"))
             socket.io.emit("productAdded",product)
             
-    }
-
-    getProductsById = async (productId)=>{
-            const products = await this.getProducts()
-            const event = products.find((product)=>product.id=== productId)
-            if(!event){
-                throw "Product Not found"
-            }
-            return event
     }
 
     deleteProduct = async (productId)=>{
