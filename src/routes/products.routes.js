@@ -22,10 +22,10 @@ router.get("/",async(req,res)=>{
         return res.status(400).send({status:"Error",message: error})
     }
 })
-router.get("/:id",async(req,res)=>{
+router.get("/:pid",async(req,res)=>{
     try{
-        const productId = req.params
-        let product = await productManager.findProductById(productId)
+        const {pid} = req.params
+        let product = await productManager.findProductById(pid)
         return res.status(200).send({status:"Success",payload:product})
     }catch(error){
         return res.status(400).send({status:"Error",message: error})

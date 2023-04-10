@@ -11,6 +11,14 @@ export class ProductManager{
         const products = await productModel.find()
         return products
     }
+    findProductById = async(productId)=>{
+        const products = await this.findAll()
+        const event = products.find((product)=>product.id=== productId)
+        if(!event){
+            throw "Product Not found"
+        }
+        return event
+    }
     createProduct = async(product,filename)=>{
         const products = await this.findAll()
         const codeExist = products.find((event)=>event.code === product.code)
