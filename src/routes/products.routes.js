@@ -72,19 +72,19 @@ router.delete("/:pid",async(req,res)=>{
 
 
 
-// router.get("/",async(req,res)=>{
-//     try{
-//         let limit = parseInt(req.query.limit)
-//         let products = await productManager.getProducts(limit)
-//         return res.status(200).send({status:"OK",message:products})
+router.get("/",async(req,res)=>{
+    try{
+        let limit = parseInt(req.query.limit)
+        let products = await productManager.getProducts(limit)
+        return res.status(200).send({status:"OK",message:products})
         
-//     }catch(error){
-//         return res
-//             .status(404)
-//             .send({status:"Error",message: error})
-//     }
+    }catch(error){
+        return res
+            .status(404)
+            .send({status:"Error",message: error})
+    }
 
-// })
+})
 
 // router.get("/:pid",async(req,res)=>{
 

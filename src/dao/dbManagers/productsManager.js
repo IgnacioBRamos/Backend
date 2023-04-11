@@ -12,12 +12,11 @@ export class ProductManager{
         return products
     }
     findProductById = async(productId)=>{
-        const products = await this.findAll()
-        const event = products.find((product)=>product.id=== productId)
-        if(!event){
+        const product = await productModel.find({_id:productId})
+        if(!product){
             throw "Product Not found"
         }
-        return event
+        return product
     }
     createProduct = async(product,filename)=>{
         const products = await this.findAll()

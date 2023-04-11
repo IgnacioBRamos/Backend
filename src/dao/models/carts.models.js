@@ -4,7 +4,10 @@ import mongoose from "mongoose";
 const cartsCollection = "carts"
  
 const cartSchema = new mongoose.Schema({
-    product:Array
+    product:{
+        type:Array,
+        default: []
+    }
 })
 
 const cartModel = mongoose.model(cartsCollection,cartSchema)
