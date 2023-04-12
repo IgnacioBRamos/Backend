@@ -30,8 +30,7 @@ router.get("/realTimeProducts",async(req,res)=>{
 
 
 router.get("/realTimeMessages",async(req,res)=>{
-    let messages = await messageManager.findAll()
-    console.log(messages)
+    let messages = await messageManager.findAllforTemplate()
     res.render("chat",{messages})
 })
 

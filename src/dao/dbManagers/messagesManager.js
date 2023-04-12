@@ -9,6 +9,11 @@ export class MessageManager{
         return messages
     }
 
+
+    findAllforTemplate = async()=>{
+        const messages = await messageModel.find().lean()
+        return messages
+    }
     createMessage = async(message)=>{
         const messageCreated = await messageModel.create(message)
         return messageCreated
