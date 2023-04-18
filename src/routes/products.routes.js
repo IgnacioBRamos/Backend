@@ -14,9 +14,12 @@ const productManager = new ProductManager()
 
 
 router.get("/",async(req,res)=>{
+    const limit = parseInt(req.query.limit)
+    const page = Number(req.query.page)
+    const sort = req.query.sort
     try{
-        const limit = parseInt(req.query.limit)
-        let products = await productManager.findAll(limit)
+        let products = await productManager.findAll(limit,page,sort)
+        console.log(products)
         return res.status(200).send({status:"Success",payload:products})
     }catch(error){
         return res.status(400).send({status:"Error",message: error})
@@ -26,6 +29,7 @@ router.get("/:pid",async(req,res)=>{
     try{
         const {pid} = req.params
         let product = await productManager.findProductById(pid)
+        
         return res.status(200).send({status:"Success",payload:product})
     }catch(error){
         return res.status(400).send({status:"Error",message: error})

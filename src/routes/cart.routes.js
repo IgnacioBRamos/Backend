@@ -1,11 +1,11 @@
 import {Router} from "express"
 import { CartManager } from "../dao/dbManagers/cartsManager.js"
 //import { CartManager } from "../dao/fileManagers/cartManager.js"
-
+import { ProductManager } from "../dao/dbManagers/productsManager.js"
 
 
 const cartManager = new CartManager()
-
+const productManager = new ProductManager()
 const router = Router()
 
 
@@ -32,11 +32,12 @@ router.get("/:cid",async(req,res)=>{
 
 router.post("/:cid/product/:pid",async(req,res)=>{
     let idCart = req.params.cid
-    let idProduct = Number(req.params.pid)
-    let quantity = Number(req.body.quantity)
+    let idProduct = req.params.pid
+    
 
     try{
-        let arrInterno = await cartManager.addProductInsideCart(idCart,idProduct,quantity)
+        let product = await productManager.findProductById(idProduct)
+        arrInterno = await cartManager.addProductInsideCart(idCart,idproduct)
         return res
                 .status(200)
                 .send({status: `Success`, message: arrInterno});

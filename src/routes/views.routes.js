@@ -1,18 +1,32 @@
 import { Router } from "express"
-import { ProductManager } from "../dao/fileManagers/productManager.js";
+import { ProductManager } from "../dao/dbManagers/productsManager.js";
 import { MessageManager } from "../dao/dbManagers/messagesManager.js";
+import { CartManager } from "../dao/dbManagers/cartsManager.js";
 
 const router = Router()
 
 const productManager = new ProductManager()
-
+const cartManager = new CartManager()
 const messageManager = new MessageManager()
 
-router.get("/pruebaproducts",async(req,res)=>{
+router.get("/products",async(req,res)=>{
     try{
         let limit = parseInt(req.query.limit)
-        let products = await productManager.getProducts(limit)
+        let products = await productManager.findAll(2,2)
         res.render('index',{products})
+        
+        
+    }catch(error){
+        return res
+            .status(404)
+            .send({status:"Error",message: error})
+    }
+})
+router.get("/carts/:cid",async(req,res)=>{
+    try{
+        let cartId = parseInt(req.params.cid)
+        let cart = await cartManager.findCartById(cartId)
+        res.render('cart',{cart})
         
         
     }catch(error){

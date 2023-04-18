@@ -3,12 +3,11 @@ import { productModel } from "../models/products.models.js"
 
 
 export class ProductManager{
-    findAll = async (limit)=>{
+    findAll = async (limit,page,sort)=>{
         if(limit){
-            const products = await productModel.find().limit(limit)
-            return products    
+            await productModel.paginate({},{limit:limit,page:page})
         }
-        const products = await productModel.find()
+        const products = await productModel.find().lean()
         return products
     }
     findProductById = async(productId)=>{
