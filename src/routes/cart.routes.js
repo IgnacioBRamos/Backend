@@ -1,19 +1,17 @@
 import {Router} from "express"
 import { CartManager } from "../dao/dbManagers/cartsManager.js"
 //import { CartManager } from "../dao/fileManagers/cartManager.js"
-import { ProductManager } from "../dao/dbManagers/productsManager.js"
 
 
 const cartManager = new CartManager()
-const productManager = new ProductManager()
 const router = Router()
 
 
 router.post("/",async(req,res)=>{
+    const cart= req.body
     try{
-        const cart= req.body
-        cartManager.addCart(cart)
-        return res.status(201).send({status:"Success",message:"Cart created"})
+        const newCart = await cartManager.addCart(cart)
+        return res.status(201).send({status:"Success",message:"Cart created",payload:newCart})
     }catch(error){
         return res.status(400).send({status:"Error",message:error})
     }
@@ -23,7 +21,7 @@ router.get("/:cid",async(req,res)=>{
         const cartId = req.params.cid
     try{
         const cart = await cartManager.findCartById(cartId)
-        return res.status(201).send({status:"Success",message:cart})
+        return res.status(201).send({status:"Success",message:"Cart Found",payload:cart})
     }catch(error){
         return res.status(400).send({status:"Error",message:error})
     }
@@ -31,13 +29,11 @@ router.get("/:cid",async(req,res)=>{
 })
 
 router.post("/:cid/product/:pid",async(req,res)=>{
-    let idCart = req.params.cid
-    let idProduct = req.params.pid
-    
-
+    let cartId = req.params.cid
+    let productId = req.params.pid
+    let {quantity} = req.body
     try{
-        let product = await productManager.findProductById(idProduct)
-        arrInterno = await cartManager.addProductInsideCart(idCart,idproduct)
+        arrInterno = await cartManager.addProductInsideCart(cartId,productId,quantity)
         return res
                 .status(200)
                 .send({status: `Success`, message: arrInterno});

@@ -8,21 +8,25 @@ export class CartManager{
         return carts
     }
     addCart = async(cart) =>{
+        if(!cart){
+            throw "Product not added"
+        }
         const newCart = await cartModel.create(cart)
+        return newCart
     }
     findCartById= async(productId) =>{
-        const cart = await cartModel.find({_id:productId})
+        const cart = await cartModel.find({_id:productId}).populate("products.product");
         if(!cart){
             throw "Cart not Found"
         }else{
             return cart
         }
     }
-    addProductInsideCart=async(cartId,productFound)=>{
-        //const cart = await this.findCartById(cartId)
-        
-        const cartActualizado = await cartModel.updateOne({_id:cartId},{$addToSet:{product:[productFound]}} )
-        console.log(cartActualizado)
+    addProductInsideCart=async(cartId,productId,quantity)=>{
+        const cartActualizado = await cartModel.updateOne({_id:cartId},{ $push: { products: [{ product: productId, quantity }] }} )
+        if(!cartActualizado){
+            throw "Product not found"
+        }
         return cartActualizado
     }
 }
