@@ -5,19 +5,28 @@ import productsRouter from "./routes/products.routes.js"
 import cartsRouter from "./routes/cart.routes.js"
 import viewsRouter from "./routes/views.routes.js"
 import messageRouter from "./routes/messages.routes.js"
-import dotenv from "dotenv"
-//import {Server} from "socket.io"
 import socket from "./socket.js";
-import mongoose from "mongoose";
+import dataBase from "./db.js";
+import sessionsRouter from "./routes/sessions.routes.js"
+import session from "express-session";
+import MongoStore from "connect-mongo";
 
-dotenv.config()
-
-
-
+import config from "./config.js";
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use("/", express.static(`${__dirname}/public`));
+
+app.use(session({
+    store:MongoStore.create({
+        mongoUrl:config.dbUrl,
+        ttl:20
+    }),
+    resave:false,
+    saveUninitialized:true,
+    secret:"sdsada"
+}))
+
 
 
 
@@ -27,8 +36,7 @@ const httpServer = app.listen(8080,()=>{
 })
 
 
-const DB_USER = process.env.DB_USER
-const DB_PASSWORD = process.env.DB_PASSWORD
+
 
 
 
@@ -47,7 +55,7 @@ app.set('view engine','handlebars')
 
 
 
-
+app.use("/api/sessions",sessionsRouter)
 app.use("/api/messages",messageRouter)
 app.use("/api/products",productsRouter)
 app.use("/api/carts",cartsRouter)
@@ -55,4 +63,4 @@ app.use("/",viewsRouter)
 
 
 
-mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@ecommerce.dm8khzb.mongodb.net/?retryWrites=true&w=majority`)
+dataBase.connect()
