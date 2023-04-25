@@ -14,11 +14,12 @@ const productManager = new ProductManager()
 
 
 router.get("/",async(req,res)=>{
-    const limit = parseInt(req.query.limit)
-    const page = Number(req.query.page)
+    const limit = Number(req.query.limit) || 10
+    const page = Number(req.query.page) || 1
     const sort = req.query.sort
+    const query = req.query.query
     try{
-        let products = await productManager.findAll(limit,page,sort)
+        let products = await productManager.findAll(limit,page,sort,query)
         console.log(products)
         return res.status(200).send({status:"Success",payload:products})
     }catch(error){

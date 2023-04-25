@@ -3,11 +3,13 @@ import { productModel } from "../models/products.models.js"
 
 
 export class ProductManager{
-    findAll = async (limit,page,sort)=>{
-        if(limit){
-            await productModel.paginate({},{limit:limit,page:page})
+    findAll = async (limit,page,sort,query)=>{
+        if(query||sort){
+            const products = await productModel.paginate({$and:[{category:query},{status:true}]},{limit:limit,page:page})
+            return products
         }
-        const products = await productModel.find().lean()
+
+        const products = await productModel.paginate({},{limit:limit,page:page})
         return products
     }
     findProductById = async(productId)=>{
@@ -18,7 +20,7 @@ export class ProductManager{
         return product
     }
     createProduct = async(product,filename)=>{
-        const products = await this.findAll()
+        const products = await productModel.find()
         const codeExist = products.find((event)=>event.code === product.code)
         if(!product.title || !product.description || !product.price || !product.code || !product.category || !product.stock){
             throw 'Error: all fields are mandatory'
