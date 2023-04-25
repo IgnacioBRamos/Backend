@@ -24,10 +24,11 @@ const messageManager = new MessageManager()
 //     }
 // })
 router.get("/carts/:cid",async(req,res)=>{
+    let cartId = req.params.cid
     try{
-        let cartId = parseInt(req.params.cid)
         let cart = await cartManager.findCartById(cartId)
-        res.render('cart',{cart})
+        console.log(cart.products)
+        res.render('cart',{products:cart.products})
         
         
     }catch(error){
@@ -49,10 +50,55 @@ router.get("/realTimeMessages",async(req,res)=>{
     res.render("chat",{messages})
 })
 
-router.get("/puca", async (req, res) => {
+router.get("/products", async (req, res) => {
+    const options = {
+        query: {},
+        pagination: {
+          limit: req.query.limit ?? 10,
+          page: req.query.page ?? 1,
+          lean: true,
+          sort: {},
+        },
+      };
     
-})
-
+      if (req.query.category) {
+        options.query.category = req.query.category;
+      }
+    
+      if (req.query.status) {
+        options.query.status = req.query.status;
+      }
+    
+      if (req.query.sort) {
+        options.pagination.sort.price = req.query.sort;
+      }
+    
+      const {
+        docs: products,
+        totalPages,
+        prevPage,
+        nextPage,
+        page,
+        hasPrevPage,
+        hasNextPage,
+      } = await productManager.paginatedProducts(options);
+    
+      const link = "/products/?page=";
+    
+      const prevLink = hasPrevPage ? link + prevPage : link + page;
+      const nextLink = hasNextPage ? link + nextPage : link + page;
+    
+      return res.render("products", {
+        products,
+        totalPages,
+        page,
+        hasNextPage,
+        hasPrevPage,
+        prevLink,
+        nextLink,
+        title: "Products",
+      });
+    });
 
 
 router.get("/register",(req,res)=>{

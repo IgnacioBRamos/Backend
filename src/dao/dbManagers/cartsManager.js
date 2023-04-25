@@ -15,7 +15,7 @@ export class CartManager{
         return newCart
     }
     findCartById= async(productId) =>{
-        const cart = await cartModel.find({_id:productId}).populate("products.product");
+        const cart = await cartModel.find({_id:productId}).populate("products.product").lean();
         if(!cart){
             throw "Cart not Found"
         }else{
@@ -23,12 +23,24 @@ export class CartManager{
         }
     }
     addProductInsideCart=async(cartId,productId,quantity)=>{
-        const cartActualizado = await cartModel.updateOne({_id:cartId},{ $push: { products: [{ product: productId, quantity }] }} )
-        if(!cartActualizado){
-            throw "Product not found"
+
+        const productExist = await cartModel.findOne({
+            products: { $elemMatch: { product: productId } },
+          })
+
+        if (!productExist){
+            const cartActualizado = await cartModel.updateOne({_id:cartId},{ $push: { products: [{ product: productId, quantity }] }} )
+            if(!cartActualizado){
+                throw "Product not found"
+            }   
+            return cartActualizado
         }
-        console.log(cartActualizado)
-        return cartActualizado
+        const cartActualizado = await cartModel.updateOne(
+            { _id: cartId },
+            { $inc: { "products.$[elem].quantity": quantity } },
+            { arrayFilters: [{ "elem.product": productId }] }
+          );
+          return cartActualizado
     }
     emptyCart=async(cartId)=>{
         const cart = await cartModel.findById(cartId)
@@ -49,9 +61,7 @@ export class CartManager{
         if (!cart) {
             throw "cart not found"
         }
-        //console.log(cart.products)
         const product = cart.products.find((product) => product.id === productId)
-        console.log(product)
         if (!product) {
             throw "Product not found"
         }

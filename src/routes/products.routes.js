@@ -14,18 +14,55 @@ const productManager = new ProductManager()
 
 
 router.get("/",async(req,res)=>{
-    const limit = Number(req.query.limit) || 10
-    const page = Number(req.query.page) || 1
-    const sort = req.query.sort
-    const query = req.query.query
-    try{
-        let products = await productManager.findAll(limit,page,sort,query)
-        console.log(products)
-        return res.status(200).send({status:"Success",payload:products})
-    }catch(error){
-        return res.status(400).send({status:"Error",message: error})
-    }
-})
+    const options = {
+        query: {},
+        pagination: {
+          limit: req.query.limit ?? 10,
+          page: req.query.page ?? 1,
+          sort: {},
+        },
+      };
+    
+      if (req.query.category) {
+        options.query.category = req.query.category;
+      }
+    
+      if (req.query.status) {
+        options.query.status = req.query.status;
+      }
+    
+      if (req.query.sort) {
+        options.pagination.sort.price = req.query.sort;
+      }
+    
+      const {
+        docs: products,
+        totalPages,
+        prevPage,
+        nextPage,
+        page,
+        hasPrevPage,
+        hasNextPage,
+      } = await productManager.paginatedProducts(options);
+    
+      const link = "/products?page=";
+    
+      const prevLink = hasPrevPage ? link + prevPage : link + page;
+      const nextLink = hasNextPage ? link + nextPage : link + page;
+    
+      return res.send({
+        status: "sucess",
+        payload: products,
+        totalPages,
+        prevPage,
+        nextPage,
+        page,
+        hasNextPage,
+        hasPrevPage,
+        prevLink,
+        nextLink,
+      });
+    });
 router.get("/:pid",async(req,res)=>{
     try{
         const {pid} = req.params

@@ -3,14 +3,14 @@ import { productModel } from "../models/products.models.js"
 
 
 export class ProductManager{
-    findAll = async (limit,page,sort,query)=>{
-        if(query||sort){
-            const products = await productModel.paginate({$and:[{category:query},{status:true}]},{limit:limit,page:page})
-            return products
-        }
-
-        const products = await productModel.paginate({},{limit:limit,page:page})
+    findAll = async ()=>{
+        const products = await productModel.find().lean()
         return products
+    }
+    paginatedProducts = async(options)=>{
+        const { query, pagination } = options;
+        const paginatedProducts = await productModel.paginate(query, pagination);
+        return paginatedProducts;
     }
     findProductById = async(productId)=>{
         const product = await productModel.find({_id:productId})

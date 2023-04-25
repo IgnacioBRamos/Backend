@@ -1,15 +1,15 @@
-import { ProductManager } from "../../dao/dbManagers/productsManager";
+const cartId = "6445730be656033baddf7a34";
 
-const productManager = new ProductManager()
+async function addToCart(productId) {
+  let response = await fetch(`/api/carts/${cartId}/product/${productId}`, {
+    method: "POST",
+    body: JSON.stringify({ quantity: 1 }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-
-const boton = document.getElementById("button")
-
-const nextPage = await productManager.findAll(5,2)
-
-boton.addEventListener("click",siguientePagina)
-
-function siguientePagina(){
-    nextPage
+  let result = await response.json();
+  console.log(result);
 }
 
