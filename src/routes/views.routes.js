@@ -10,6 +10,22 @@ const productManager = new ProductManager()
 const cartManager = new CartManager()
 const messageManager = new MessageManager()
 
+
+
+function checkLogin(req, res, next) {
+  if (!req.session.user) return res.redirect("/login");
+  next();
+}
+
+function checkLogged(req, res, next) {
+  if (req.session.user) return res.redirect("/products");
+  next();
+}
+
+
+
+
+
 // router.get("/products",async(req,res)=>{
 //     try{
 //         let limit = parseInt(req.query.limit)
@@ -104,7 +120,7 @@ router.get("/products", async (req, res) => {
 router.get("/register",(req,res)=>{
     res.render("register")
 })
-router.get("/login",(req,res)=>{
+router.get("/login",checkLogged,(req,res)=>{
     res.render("login")
 })
 export default router

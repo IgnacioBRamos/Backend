@@ -10,12 +10,22 @@ router.post("/login",async(req,res)=>{
         if(!user){
             return res.status(400).send({status:"error",error:"incorrect credentials"})
         }
-        req.session.user = {
-            name: `${user.first_name} ${user.last_name}`,
-            email: user.email,
-            age: user.age
+        if(user.email == "adminCoder@coder.com" && user.password == "adminCod3r123"){
+            req.session.user = {
+                name: `${user.first_name} ${user.last_name}`,
+                email: user.email,
+                age: user.age,
+                rol:"admin"
+            }
+        }else{
+            req.session.user = {
+                name: `${user.first_name} ${user.last_name}`,
+                email: user.email,
+                age: user.age,
+                rol:"user"
+            }
         }
-        return res.send({status:"success",message:"Logged in",payload:req.session.user})  
+        return res.send({status:"success",message:"Logged in",payload:req.session.user}).redirect("/products")  
     }catch(error){
         console.log(error)
     }
@@ -43,5 +53,15 @@ router.post("/register",async (req,res)=>{
     }
 })
 
+
+router.get("/logout",(req,res)=>{
+    req.session.destroy(err => {
+        if (err) {
+          console.error(err);
+        } else {
+          res.redirect('/login');
+        }
+      });
+})
 
 export default router
