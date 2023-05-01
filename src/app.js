@@ -10,6 +10,8 @@ import dataBase from "./db.js";
 import sessionsRouter from "./routes/sessions.routes.js"
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import passport from "passport";
+import initializePassport from "./auth/passport.js";
 
 import config from "./config.js";
 const app = express();
@@ -26,8 +28,9 @@ app.use(session({
     saveUninitialized:true,
     secret:"sdsada"
 }))
-
-
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
 
 const httpServer = app.listen(8080,()=>{
