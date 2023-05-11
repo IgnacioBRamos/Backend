@@ -43,7 +43,7 @@ router.get("/github",passport.authenticate("githublogin",{scope:["user:email"]})
 
 router.get("/githubcallback",passport.authenticate("githublogin",{failureRedirect:"/login"}),(req,res)=>{
     req.session.user=req.user
-    res.redirect("/")
+    res.redirect("/products")
 })
 
 export default router
