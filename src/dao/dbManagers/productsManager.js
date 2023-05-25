@@ -2,7 +2,7 @@ import { productModel } from "../models/products.models.js"
 
 
 
-export class ProductManager{
+class ProductManager{
     findAll = async ()=>{
         const products = await productModel.find().lean()
         return products
@@ -46,9 +46,14 @@ export class ProductManager{
             throw "You can not update id"
         }
         const updateProduct= await productModel.updateOne({_id:idProduct},changes)
+        return updateProduct
     }
     deleteProduct = async(idProduct)=>{
         const deleteProduct = await productModel.deleteOne({_id:idProduct})
+        return deleteProduct
     }
 
 }
+
+
+export const productManager = new ProductManager()

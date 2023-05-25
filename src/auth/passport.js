@@ -11,7 +11,7 @@ const localStrategy =  local.Strategy
 const initializePassport = ()=>{
     passport.use("register",new localStrategy(
         {passReqToCallback:true, usernameField:"email"},async(req,username,password,done)=>{
-            const {first_name,last_name,email,age} = req.body
+            const {first_name,last_name,email,age,role} = req.body
             try{
                 let user = await userModel.findOne({email:username})
                 if(user){
@@ -22,7 +22,11 @@ const initializePassport = ()=>{
                     last_name,
                     email,
                     age,
+                    role,
                     password: createHash(password)
+                }
+                if (newUser.email== "adminCoder@coder.com"){
+                    newUser.role= "admin"
                 }
                 let result = await userModel.create(newUser)
                 return done(null,result)
