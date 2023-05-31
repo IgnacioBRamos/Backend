@@ -70,3 +70,5 @@ export class CartManager{
         return cart
     }
 }
+
+export const cartManager = new CartManager
