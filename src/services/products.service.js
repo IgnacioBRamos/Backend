@@ -5,11 +5,11 @@ class ProductsService{
     constructor(){}
     
     getProducts(options){
-        const products = productRepository.getProducts(options)
+        const products = productRepository.paginatedProducts(options)
         return products
     }
     getProductById(productId){
-        const product = productRepository.getProductById(productId)
+        const product = productRepository.findProductById(productId)
         return product
     }
     createProduct(product,filename){

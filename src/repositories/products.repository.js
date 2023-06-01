@@ -1,29 +1,56 @@
-import { productManager } from "../dao/dbManagers/productsManager.js";
+import { productModel } from "../dao/models/products.models.js"
 
 
 class ProductRepository{
-    constructor(){}
-    getProducts(options){
-        const products = productManager.paginatedProducts(options)
+    findAll = async ()=>{
+        const products = await productModel.find().lean()
         return products
     }
-    getProductById(productId){
-        const product = productManager.findProductById(productId)
+    paginatedProducts = async(options)=>{
+        const { query, pagination } = options;
+        const paginatedProducts = await productModel.paginate(query, pagination);
+        return paginatedProducts;
+    }
+    findProductById = async(productId)=>{
+        const product = await productModel.find({_id:productId})
+        if(!product){
+            throw "Product Not found"
+        }
         return product
     }
-    createProduct(product,filename){
-        const newProduct = productManager.createProduct(product,filename)
-        return newProduct
-    }
-    updateProduct(idProduct,changes){
-        const updatedProduct = productManager.updateProduct(idProduct,changes)
-        return updatedProduct
-    }
-    deleteProduct(idProduct){
-        const productDeleted = productManager.deleteProduct(idProduct)
-        return productDeleted
-    }
+    createProduct = async(product,filename)=>{
+        const products = await productModel.find()
+        const codeExist = products.find((event)=>event.code === product.code)
+        if(!product.title || !product.description || !product.price || !product.code || !product.category || !product.stock){
+            throw 'Error: all fields are mandatory'
+        }
+        product.thumbnails = []
+        if (!filename) {
+            throw "No se pudo cargar el archivo"
+          }else{
+            filename.forEach(file => {
+                const imgUrl = `http://localhost:8080/images/${file.filename}`
+                product.thumbnails.push(imgUrl)
+            });
+          }
+        if(codeExist){
+            throw `Error: the code ${product.code} for the product already exists`
+        }
 
+        const createdProduct = await productModel.create(product)
+        return createdProduct
+    }
+    updateProduct = async (idProduct,changes)=>{
+        if(changes.id){
+            throw "You can not update id"
+        }
+        const updateProduct= await productModel.updateOne({_id:idProduct},changes)
+        return updateProduct
+    }
+    deleteProduct = async(idProduct)=>{
+        const deleteProduct = await productModel.deleteOne({_id:idProduct})
+        return deleteProduct
+    }
 }
 
 export const productRepository = new ProductRepository
