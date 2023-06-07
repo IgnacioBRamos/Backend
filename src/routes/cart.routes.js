@@ -1,5 +1,5 @@
 import {Router} from "express"
-import { addProduct, createCart, deleteProduct, emptyCart, findCart, updateQuantity } from "../controllers/cart.controller.js"
+import { addProductInsideCart, createCart, deleteProduct, emptyCart, getCart , updateQuantity } from "../controllers/cart.controller.js"
 //import { CartManager } from "../dao/fileManagers/cartManager.js"
 
 
@@ -9,9 +9,9 @@ const router = Router()
 
 router.post("/",createCart)
 
-router.get("/:cid",findCart)
+router.get("/:cid",getCart)
 
-router.post("/:cid/product/:pid",addProduct)
+router.post("/:cid/product/:pid",addProductInsideCart)
 router.delete("/:cid/products/:pid",deleteProduct)
 router.delete("/:cid",emptyCart)
 

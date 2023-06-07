@@ -2,7 +2,7 @@ import {Router} from "express"
 //import { ProductManager } from "../dao/fileManagers/productManager.js";
 import { uploader } from "../utils.js";
 //import { productModel } from "../dao/models/products.models.js";
-import { getProducts,findProductById,createProduct,editProduct,deleteProduct} from "../controllers/products.controller.js";
+import { getProducts,findProductById,createProduct,deleteProduct, updateProduct} from "../controllers/products.controller.js";
 
 const router = Router()
 
@@ -14,7 +14,7 @@ router.get("/:pid",findProductById)
 
 router.post("/",uploader.array("thumbnails",5),createProduct)
 
-router.put("/:pid",editProduct)
+router.put("/:pid",updateProduct)
 
 router.delete("/:pid",deleteProduct)
 

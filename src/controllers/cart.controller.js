@@ -10,7 +10,7 @@ export async function createCart(req,res){
     }
 }
 
-export async function findCart(req,res){
+export async function getCart(req,res){
     const cartId = req.params.cid
 try{
     const cart = await cartService.getCart(cartId)
@@ -22,12 +22,12 @@ try{
 }
 
 
-export async function addProduct(req,res){
+export async function addProductInsideCart(req,res){
     let cartId = req.params.cid
     let productId = req.params.pid
     let {quantity} = req.body
     try{
-        arrInterno = await cartService.addProduct(cartId,productId,quantity)
+        arrInterno = await cartService.addProductInsideCart(cartId,productId,quantity)
         return res
                 .status(200)
                 .send({status: `Success`, message: arrInterno});

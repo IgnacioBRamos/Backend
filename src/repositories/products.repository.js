@@ -1,55 +1,52 @@
-import { productModel } from "../dao/models/products.models.js"
+import { productDao } from "../dao/mongo/products.dao.js"
 
 
 class ProductRepository{
-    findAll = async ()=>{
-        const products = await productModel.find().lean()
-        return products
-    }
-    paginatedProducts = async(options)=>{
-        const { query, pagination } = options;
-        const paginatedProducts = await productModel.paginate(query, pagination);
-        return paginatedProducts;
-    }
-    findProductById = async(productId)=>{
-        const product = await productModel.find({_id:productId})
-        if(!product){
-            throw "Product Not found"
+    constructor(){}
+    getProducts = async (options) => {
+        try {
+          const products = await productDao.getProducts(options);
+          return products;
+        } catch (error) {
+          console.log(error);
+          return null;
         }
-        return product
     }
-    createProduct = async(product,filename)=>{
-        const products = await productModel.find()
-        const codeExist = products.find((event)=>event.code === product.code)
-        if(!product.title || !product.description || !product.price || !product.code || !product.category || !product.stock){
-            throw 'Error: all fields are mandatory'
-        }
-        product.thumbnails = []
-        if (!filename) {
-            throw "No se pudo cargar el archivo"
-          }else{
-            filename.forEach(file => {
-                const imgUrl = `http://localhost:8080/images/${file.filename}`
-                product.thumbnails.push(imgUrl)
-            });
-          }
-        if(codeExist){
-            throw `Error: the code ${product.code} for the product already exists`
-        }
-
-        const createdProduct = await productModel.create(product)
-        return createdProduct
+    getProductById = async (id) => {
+    try {
+        const product = await productDao.getProductById(id);
+        return product;
+    } catch (error) {
+        console.log(error);
+        return null;
     }
-    updateProduct = async (idProduct,changes)=>{
-        if(changes.id){
-            throw "You can not update id"
-        }
-        const updateProduct= await productModel.updateOne({_id:idProduct},changes)
-        return updateProduct
     }
-    deleteProduct = async(idProduct)=>{
-        const deleteProduct = await productModel.deleteOne({_id:idProduct})
-        return deleteProduct
+    createProduct = async (product,filename) => {
+    try {
+        const result = await productDao.createProduct(product,filename);
+        return result;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+    }
+    updateProduct = async (id, changes) => {
+    try {
+        const result = await productDao.updateProduct(id, changes);
+        return result;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+    }
+    deleteProduct = async (id) => {
+    try {
+        const result = await productDao.deleteProduct(id);
+        return result;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
     }
 }
 

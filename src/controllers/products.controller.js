@@ -75,7 +75,7 @@ export async function createProduct(req,res){
         return res.status(400).send({status:"Error",message: error})
     }
 }
-export async function editProduct(req,res){
+export async function updateProduct(req,res){
     const {pid} = req.params
     const changes = req.body
     try{

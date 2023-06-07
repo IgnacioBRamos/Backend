@@ -1,9 +1,9 @@
-import { productManager } from "../dao/dbManagers/productsManager.js";
-import { MessageManager } from "../dao/dbManagers/messagesManager.js";
-import { CartManager } from "../dao/dbManagers/cartsManager.js";
+import { productDao } from "../dao/mongo/products.dao.js";
+import { MessageManager } from "../dao/mongo/messagesManager.js";
+import { cartDao } from "../dao/mongo/cart.dao.js";
 
 
-const cartManager = new CartManager()
+
 const messageManager = new MessageManager()
 
 export async function renderProducts(req, res){
@@ -37,7 +37,7 @@ export async function renderProducts(req, res){
         page,
         hasPrevPage,
         hasNextPage,
-      } = await productManager.paginatedProducts(options);
+      } = await productDao.getProducts(options);
     
       const link = "/products/?page=";
     
@@ -60,7 +60,7 @@ export async function renderProducts(req, res){
 export async function renderCart(req,res){
     let cartId = req.params.cid
     try{
-        let cart = await cartManager.findCartById(cartId)
+        let cart = await cartDao.findCartById(cartId)
         console.log(cart.products)
         res.render('cart',{products:cart.products})
         

@@ -4,15 +4,15 @@ class CartService{
     constructor(){}
 
     createCart(cart){
-        const newCart = cartRepository.addCart(cart)
+        const newCart = cartRepository.createCart(cart)
         return newCart
     }
-    getCart(id){
-        const cart = cartRepository.findCartById(id)
+    getCartById(id){
+        const cart = cartRepository.getCartById(id)
         return cart
     }
 
-    addProduct(cartId,productId,quantity){
+    addProductInsideCart(cartId,productId,quantity){
         const newProduct = cartRepository.addProductInsideCart(cartId,productId,quantity)
         return newProduct
     }
