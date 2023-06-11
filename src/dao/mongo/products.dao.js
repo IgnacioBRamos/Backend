@@ -1,7 +1,7 @@
 import { productModel } from "../models/products.models.js";
 
 
-class Product{
+export default class Product{
     getProducts = async(options)=>{
         const { query, pagination } = options;
         const paginatedProducts = await productModel.paginate(query, pagination);
@@ -49,4 +49,3 @@ class Product{
     }
 }
 
-export const productDao = new Product

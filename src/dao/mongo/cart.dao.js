@@ -2,7 +2,7 @@ import { cartModel } from "../models/carts.models.js"
 
 
 
-class Cart {
+export default class Cart {
     constructor(){}
 
     createCart = async(cart) =>{
@@ -77,4 +77,3 @@ class Cart {
 }
 
 
-export const cartDao = new Cart

@@ -1,9 +1,9 @@
 import {Router} from "express"
-import { MessageManager } from "../dao/mongo/messagesManager.js"
+import { messageManager } from "../dao/mongo/index.js"
 const router = Router()
 
 
-const messageManager = new MessageManager()
+
 
 router.get("/",async (req,res)=>{
     const messages = await messageManager.findAll()

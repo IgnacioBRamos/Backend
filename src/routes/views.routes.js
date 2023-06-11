@@ -1,23 +1,7 @@
 import { Router } from "express"
 import { renderCart, renderMessages, renderProducts } from "../controllers/views.controller.js";
-
+import { checkLogged,checkLogin } from "../middlewares/auth.js";
 const router = Router()
-
-
-
-
-
-function checkLogin(req, res, next) {
-  if (!req.session.user) return res.redirect("/login");
-  next();
-}
-
-function checkLogged(req, res, next) {
-  if (req.session.user) return res.redirect("/products");
-  next();
-}
-
-
 
 
 
@@ -54,4 +38,9 @@ router.get("/register",(req,res)=>{
 router.get("/login",checkLogged,(req,res)=>{
     res.render("login")
 })
+
+
+router.get("/current",checkLogin, (req, res) => {
+  res.render("profile", { user: req.session.user });
+});
 export default router

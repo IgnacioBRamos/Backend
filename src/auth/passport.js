@@ -4,6 +4,8 @@ import local from "passport-local"
 import userModel from "../dao/models/users.model.js";
 import { createHash, isValidPassword } from "../utils.js";
 import config from "../config.js";
+import { cartModel } from "../dao/models/carts.models.js";
+import { usersService } from "../services/index.js";
 
 const {clientID,clientSecret,callbackUrl} = config
 const localStrategy =  local.Strategy
@@ -17,21 +19,23 @@ const initializePassport = ()=>{
                 if(user){
                     return done(null,false)
                 }
+                const cart = await cartModel.create({})
                 const newUser={
                     first_name,
                     last_name,
                     email,
                     age,
                     role,
-                    password: createHash(password)
+                    password: createHash(password),
+                    cart:cart._id
                 }
                 if (newUser.email== "adminCoder@coder.com"){
                     newUser.role= "admin"
                 }
-                let result = await userModel.create(newUser)
+                let result = await usersService.createUser(newUser)
                 return done(null,result)
             }catch(error){
-                return done("user can not be found "+user)
+                return done("user can not be found "+ user)
             }
         }
     ))

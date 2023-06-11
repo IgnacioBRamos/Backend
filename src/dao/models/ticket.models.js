@@ -21,3 +21,8 @@ const ticketSchema = new mongoose.Schema({
         required: true
       }
 })
+
+
+const ticketModel = mongoose.model(ticketCollection,ticketSchema)
+
+export default ticketModel

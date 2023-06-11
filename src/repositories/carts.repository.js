@@ -1,4 +1,4 @@
-import { cartDao } from "../dao/mongo/cart.dao.js"
+import { cartDao } from "../dao/mongo/index.js"
 
 class CartRepository {
     constructor(){}

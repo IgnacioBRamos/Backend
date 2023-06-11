@@ -1,10 +1,8 @@
-import { productDao } from "../dao/mongo/products.dao.js";
-import { MessageManager } from "../dao/mongo/messagesManager.js";
-import { cartDao } from "../dao/mongo/cart.dao.js";
+import { productDao } from "../dao/mongo/index.js";
+import { messageManager } from "../dao/mongo/index.js"
+import { cartDao } from "../dao/mongo/index.js";
 
 
-
-const messageManager = new MessageManager()
 
 export async function renderProducts(req, res){
     const options = {

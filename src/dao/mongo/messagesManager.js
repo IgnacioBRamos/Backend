@@ -3,7 +3,7 @@ import { messageModel } from "../models/messages.models.js";
 
 
 
-export class MessageManager{
+export default class MessageManager{
     findAll = async()=>{
         const messages = await messageModel.find()
         return messages

@@ -1,11 +1,12 @@
-import { productDao } from "../dao/mongo/products.dao.js"
+import {productDao} from "../dao/mongo/index.js"
 
 
-class ProductRepository{
-    constructor(){}
+
+export default class ProductRepository{
+    constructor(dao){this.dao=dao}
     getProducts = async (options) => {
         try {
-          const products = await productDao.getProducts(options);
+          const products = await this.dao.getProducts(options);
           return products;
         } catch (error) {
           console.log(error);
@@ -50,4 +51,4 @@ class ProductRepository{
     }
 }
 
-export const productRepository = new ProductRepository
+
