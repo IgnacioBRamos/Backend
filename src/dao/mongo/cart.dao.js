@@ -27,28 +27,32 @@ export default class Cart {
         }
     }
     addProductInsideCart=async(cartId,productId,quantity)=>{
+        try {
+            const cart = await cartModel.findOne({ _id: cartId });
+            const parsedQuantity = Number(quantity);
+            if (!cart) {
+                return { error: `No se encontró el carrito.` };
+            }
 
-        const productExist = await cartModel.findOne({
-            products: { $elemMatch: { product: productId } },
-          })
+            const existingProductIndex = cart.products.findIndex(
+                (product) => product.product && product.product._id.toString() === productId
+            );
+              
+            if (existingProductIndex !== -1) {
+                cart.products[existingProductIndex].quantity += parsedQuantity;
+            } else {
+                cart.products.push({ product: productId, quantity: parsedQuantity });
+            }
 
-        if (!productExist){
-            const cartActualizado = await cartModel.updateOne({_id:cartId},{ $push: { products: [{ product: productId, quantity }] }} )
-            if(!cartActualizado){
-                throw "Product not found"
-            }   
-            return cartActualizado
+            const updatedCart = await cart.save();
+            return updatedCart;
+        } catch (error) {
+            return console.log(error);
         }
-        const cartActualizado = await cartModel.updateOne(
-            { _id: cartId },
-            { $inc: { "products.$[elem].quantity": quantity } },
-            { arrayFilters: [{ "elem.product": productId }] }
-          );
-          return cartActualizado
     }
 
     updateQuantity= async(cartId,productId,quantity)=>{
-        const cart = await cartModel.findById(cartId)
+        const cart = await cartModel.getCartById(cartId)
         if (!cart) {
             throw "cart not found"
         }
@@ -62,13 +66,13 @@ export default class Cart {
     }
 
     emptyCart=async(cartId)=>{
-        const cart = await cartModel.findById(cartId)
+        const cart = await cartModel.getCartById(cartId)
         cart.products = []
         await cart.save()
         return cart
     }
     deleteProduct=async(productId,cartId)=>{
-        const cart = await cartModel.findById(cartId)
+        const cart = await cartModel.getCartById(cartId)
         const productIndex = cart.products.findIndex(product=>product.id === productId)  
         cart.products.splice(productIndex,1)
         await cart.save()

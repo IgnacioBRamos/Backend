@@ -1,13 +1,13 @@
 import { productModel } from "../models/products.models.js";
-
-
+import CustomError from "../../services/errors/customError.js";
+import { errorMessage,errorCause,errorName } from "../../services/errors/error.enum.js";
 export default class Product{
     getProducts = async(options)=>{
         const { query, pagination } = options;
         const paginatedProducts = await productModel.paginate(query, pagination);
         return paginatedProducts;
     }
-    findProductById = async(productId)=>{
+    getProductById = async(productId)=>{
         const product = await productModel.find({_id:productId})
         if(!product){
             throw "Product Not found"
@@ -18,7 +18,11 @@ export default class Product{
         const products = await productModel.find()
         const codeExist = products.find((event)=>event.code === product.code)
         if(!product.title || !product.description || !product.price || !product.code || !product.category || !product.stock){
-            throw 'Error: all fields are mandatory'
+            CustomError.generateCustomError({
+                name:errorName.PRINCIPAL_ERROR_NAME,
+                message:errorMessage.PRINCIPAL_PRODUCT_MESSAGE,
+                cause:errorCause.PRINCIPAL_PRODUCT_CAUSE
+            })
         }
         product.thumbnails = []
         if (!filename) {

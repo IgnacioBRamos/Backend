@@ -10,10 +10,10 @@ export async function createCart(req,res){
     }
 }
 
-export async function getCart(req,res){
+export async function getCartById(req,res){
     const cartId = req.params.cid
 try{
-    const cart = await cartService.getCart(cartId)
+    const cart = await cartService.getCartById(cartId)
     return res.status(201).send({status:"Success",message:"Cart Found",payload:cart})
 }catch(error){
     return res.status(400).send({status:"Error",message:error})

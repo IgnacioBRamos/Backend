@@ -12,8 +12,8 @@ class CartRepository {
         return cart
     }
 
-    addProductInsideCart(cartId,productId,quantity){
-        const newProduct = cartDao.addProductInsideCart(cartId,productId,quantity)
+    addProductInsideCart = async(cartId,productId,quantity)=>{
+        const newProduct = await cartDao.addProductInsideCart(cartId,productId,quantity)
         return newProduct
     }
     updateQuantity(cartId,productId,quantity){

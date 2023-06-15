@@ -12,8 +12,8 @@ class CartService{
         return cart
     }
 
-    addProductInsideCart(cartId,productId,quantity){
-        const newProduct = cartRepository.addProductInsideCart(cartId,productId,quantity)
+    addProductInsideCart=async (cartId,productId,quantity)=>{
+        const newProduct = await cartRepository.addProductInsideCart(cartId,productId,quantity)
         return newProduct
     }
     updateQuantity(cartId,productId,quantity){

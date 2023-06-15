@@ -14,6 +14,7 @@ import passport from "passport";
 import initializePassport from "./auth/passport.js";
 
 import config from "./config.js";
+import { errorMiddleware } from "./services/errors/error.middleware.js";
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -22,7 +23,7 @@ app.use("/", express.static(`${__dirname}/public`));
 app.use(session({
     store:MongoStore.create({
         mongoUrl:config.dbUrl,
-        ttl:20
+        ttl:60
     }),
     resave:false,
     saveUninitialized:true,
@@ -65,5 +66,7 @@ app.use("/api/carts",cartsRouter)
 app.use("/",viewsRouter)
 
 
+
+app.use(errorMiddleware)
 
 dataBase.connect()

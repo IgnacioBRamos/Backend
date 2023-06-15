@@ -1,15 +1,16 @@
 import {Router} from "express"
-//import { ProductManager } from "../dao/fileManagers/productManager.js";
-import { uploader } from "../utils.js";
-//import { productModel } from "../dao/models/products.models.js";
+
+import { generateProduct, uploader } from "../utils.js";
+
 import { getProducts,findProductById,createProduct,deleteProduct, updateProduct} from "../controllers/products.controller.js";
+import { authorization } from "../middlewares/auth.js";
 
 const router = Router()
 
 
 
 
-router.get("/",getProducts);
+router.get("/",authorization("admin"),getProducts);
 router.get("/:pid",findProductById)
 
 router.post("/",uploader.array("thumbnails",5),createProduct)
@@ -21,70 +22,14 @@ router.delete("/:pid",deleteProduct)
 
 
 
-
-
-
-// router.get("/",async(req,res)=>{
-//     try{
-//         let limit = parseInt(req.query.limit)
-//         let products = await productManager.getProducts(limit)
-//         return res.status(200).send({status:"OK",message:products})
-        
-//     }catch(error){
-//         return res
-//             .status(404)
-//             .send({status:"Error",message: error})
-//     }
-
-// })
-
-// router.get("/:pid",async(req,res)=>{
-
-//     let idProduct = parseInt(req.params.pid)
-//     try{
-//         const product = await productManager.getProductsById(idProduct)
-//         res.status(200).send({status:"OK",message:product})
-//     }catch (error) {
-//         res.status(404).send({ status:"Error",message: error })
-//     }
-// })
-// router.post("/", uploader.array("thumbnails",5),async(req,res)=>{    
-//     const filename = req.files;
-//     let product = req.body
-//     try{
-//         await productManager.addProduct(product,filename)
-//         return res.status(201).send({status:"Success",message:"Product created"})
-//     }catch(error){
-//         res.status(400).send({ status:"Error",message: error })
-//     }
-// })
-
-// router.put("/:id",async(req,res)=>{
-
-//     let productId = Number(req.params.id)
-//     let changes = req.body
-
-//     try{
-//         await productManager.updateProduct(productId,changes)
-//         return res.status(200).send({status:"OK",message:"Product succesfully updated"})
-//     }catch(error){
-//         res.status(404).send({ status:"Error",message: error })
-//     }
-// })
-
-// router.delete("/:id",async(req,res)=>{
-//     const productId = Number(req.params.id)
-    
-//     try{
-//         await productManager.deleteProduct(productId)
-//         return res
-//         .status(200)
-//         .send({status:"Success",message:"Product successfuly deleted"})
-//     }catch(error){
-//         res.status(404).send({ status:"Error",message: error })
-//     }
-// })
-
+let products = []
+router.get("/mockingproducts",(req,res)=>{
+    for(let i = 0; i<100; i++){
+        products.push(generateProduct())
+    }
+    console.log(products)
+    res.send({status:"success",payload:products})
+})
 
 
 export default router

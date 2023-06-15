@@ -8,5 +8,14 @@ function checkLogged(req, res, next) {
     next();
 }
 
+function authorization(rol){
+    return (req, res, next) => {
+        console.log(req.user.role)
+        if(req.user.role !== rol){
+            return res.status(400).send({status:"Error",message: error})
+        }
+        next()
+    }
+}
 
-export {checkLogged,checkLogin}
+export {checkLogged,checkLogin,authorization}
