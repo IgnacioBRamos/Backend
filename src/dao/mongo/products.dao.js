@@ -10,7 +10,11 @@ export default class Product{
     getProductById = async(productId)=>{
         const product = await productModel.find({_id:productId})
         if(!product){
-            throw "Product Not found"
+            CustomError.generateCustomError({
+                name:errorName.PRINCIPAL_ERROR_NAME,
+                message:errorMessage.PRODUCT_ERROR_MESSAGE,
+                cause:errorCause.PRODUCTS_ERROR_CAUSE
+            })
         }
         return product
     }
@@ -20,8 +24,8 @@ export default class Product{
         if(!product.title || !product.description || !product.price || !product.code || !product.category || !product.stock){
             CustomError.generateCustomError({
                 name:errorName.PRINCIPAL_ERROR_NAME,
-                message:errorMessage.PRINCIPAL_PRODUCT_MESSAGE,
-                cause:errorCause.PRINCIPAL_PRODUCT_CAUSE
+                message:errorMessage.AUTHENTICATION_ERROR_MESSAGE,
+                cause:errorCause.PRODUCTS_ERROR_CAUSE
             })
         }
         product.thumbnails = []

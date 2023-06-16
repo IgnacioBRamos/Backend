@@ -1,12 +1,12 @@
 export const errorName = {
-    PRINCIPAL_ERROR_NAME: "Error Name Prueba"
+    PRINCIPAL_ERROR_NAME: "Pricipal error"
 }
 
 export const errorMessage ={
-    PRINCIPAL_PRODUCT_MESSAGE:"Error al crear producto",
-
+    AUTHENTICATION_ERROR_MESSAGE : "Invalid Credentials",
+    PRODUCT_ERROR_MESSAGE: "Product does not Exist"
 }
 
 export const errorCause = {
-    PRINCIPAL_PRODUCT_CAUSE:"ERROR DE CREACION"
+    PRODUCTS_ERROR_CAUSE:"cause Products"
 }

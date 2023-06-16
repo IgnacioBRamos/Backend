@@ -10,7 +10,7 @@ const router = Router()
 
 
 
-router.get("/",authorization("admin"),getProducts);
+router.get("/",getProducts);
 router.get("/:pid",findProductById)
 
 router.post("/",uploader.array("thumbnails",5),createProduct)
@@ -23,11 +23,10 @@ router.delete("/:pid",deleteProduct)
 
 
 let products = []
-router.get("/mockingproducts",(req,res)=>{
+router.post("/mockingproducts",(req,res)=>{
     for(let i = 0; i<100; i++){
         products.push(generateProduct())
     }
-    console.log(products)
     res.send({status:"success",payload:products})
 })
 

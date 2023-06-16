@@ -67,6 +67,6 @@ app.use("/",viewsRouter)
 
 
 
-app.use(errorMiddleware)
 
 dataBase.connect()
+app.use(errorMiddleware)

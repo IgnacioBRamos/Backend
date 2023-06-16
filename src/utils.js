@@ -22,14 +22,14 @@ const storage = multer.diskStorage({
 
 export const generateProduct = ()=>{
   return {
-    id: faker.database.mongodbObjectId(),
+    _id: faker.database.mongodbObjectId(),
     title: faker.commerce.productName(),
     description:faker.commerce.productDescription(),
     price:faker.commerce.price(),
     code:faker.string.alphanumeric(8),
     category:faker.commerce.product(),
     stock:faker.number.int({min:0,max:100}),
-    statuss:faker.datatype.boolean(1.0),
+    status:faker.datatype.boolean(1.0),
     thumbnails:faker.image.url()
   }
 }
