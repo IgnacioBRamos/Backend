@@ -1,6 +1,6 @@
 import { productModel } from "../models/products.models.js";
 import CustomError from "../../services/errors/customError.js";
-import { errorMessage,errorCause,errorName } from "../../services/errors/error.enum.js";
+import { ErrorMessage,ErrorCause,ErrorName } from "../../services/errors/error.enum.js";
 export default class Product{
     getProducts = async(options)=>{
         const { query, pagination } = options;
@@ -11,9 +11,9 @@ export default class Product{
         const product = await productModel.find({_id:productId})
         if(!product){
             CustomError.generateCustomError({
-                name:errorName.PRINCIPAL_ERROR_NAME,
-                message:errorMessage.PRODUCT_ERROR_MESSAGE,
-                cause:errorCause.PRODUCTS_ERROR_CAUSE
+                name:ErrorName.PRINCIPAL_ERROR_NAME,
+                message:ErrorMessage.PRODUCT_ERROR_MESSAGE,
+                cause:ErrorCause.PRODUCTS_ERROR_CAUSE
             })
         }
         return product
@@ -23,10 +23,11 @@ export default class Product{
         const codeExist = products.find((event)=>event.code === product.code)
         if(!product.title || !product.description || !product.price || !product.code || !product.category || !product.stock){
             CustomError.generateCustomError({
-                name:errorName.PRINCIPAL_ERROR_NAME,
-                message:errorMessage.AUTHENTICATION_ERROR_MESSAGE,
-                cause:errorCause.PRODUCTS_ERROR_CAUSE
+                name:ErrorName.PRINCIPAL_ERROR_NAME,
+                message:ErrorMessage.AUTHENTICATION_ERROR_MESSAGE,
+                cause:ErrorCause.PRODUCTS_ERROR_CAUSE
             })
+            return
         }
         product.thumbnails = []
         if (!filename) {

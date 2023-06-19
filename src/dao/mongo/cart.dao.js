@@ -1,5 +1,6 @@
 import { cartModel } from "../models/carts.models.js"
-
+import { productDao } from "./index.js"
+import { faker } from "@faker-js/faker";
 
 
 export default class Cart {
@@ -19,7 +20,7 @@ export default class Cart {
     }
     
     getCartById= async(productId) =>{
-        const cart = await cartModel.find({_id:productId}).populate("products.product").lean();
+        const cart = await cartModel.findOne({_id:productId}).populate("products.product").lean();
         if(!cart){
             throw "Cart not Found"
         }else{
@@ -78,6 +79,40 @@ export default class Cart {
         await cart.save()
         return cart
     }
+
+
+    purchase = async(cartId, currentUser)=>{
+        try {
+            const cart = await this.getCartById(cartId);
+            
+            const { products } = cart;
+            
+            products.forEach(async (order) => {
+                console.log (order)
+              order.product.stock -= order.quantity;
+              await productDao.updateProduct(order.product._id, order.product);
+            });
+      
+            const ammount = products
+              .filter((order) => order.product.stock > 0)
+              .flatMap((order) => order.product.price * order.quantity)
+              .reduce((sum, cur) => (sum += cur), 0);
+      
+            const ticket = {
+              code: faker.string.alphanumeric({ casing: "upper", length: 7 }),
+              ammount,
+              purchaser: currentUser,
+            };
+            console.log(ticket)
+            const result = await cartModel.create(ticket);
+      
+            return result;
+          } catch (error) {
+            console.log(error);
+            return null;
+          }
+        };
+    
 }
 
 

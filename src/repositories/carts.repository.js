@@ -28,7 +28,15 @@ class CartRepository {
         const productDeleted = cartDao.deleteProduct(productId,cid)
         return productDeleted
     }
-
+    purchase = async (cartId, currentUser) => {
+        try {
+          const result = await cartDao.purchase(cartId, currentUser)
+          return result
+        } catch (error) {
+          console.log(error)
+          return null
+        }
+      }
 }
 
 export const cartRepository = new CartRepository

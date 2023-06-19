@@ -69,3 +69,15 @@ export async function deleteProduct(req,res){
         res.status(404).send({ status:"Error", message: error})
     }
 }
+
+
+export const purchase = async (req, res) => {
+    try {
+      const cartId = req.params.cid;
+      const currentUser = req.user.email;
+      const result = await cartService.purchase(cartId, currentUser);
+      return res.send({ status: "success", result });
+    } catch (error) {
+      console.log(error);
+    }
+  };
