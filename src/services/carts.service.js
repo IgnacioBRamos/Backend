@@ -28,9 +28,9 @@ class CartService{
         const productDeleted = cartRepository.deleteProduct(productId,cid)
         return productDeleted
     }
-    purchase = async (ticket) => {
+    purchase = async (cartId, currentUser) => {
         try {
-          const result = await cartRepository.purchase(ticket)
+          const result = await cartRepository.purchase(cartId, currentUser)
           return result
         } catch (error) {
           console.log(error)

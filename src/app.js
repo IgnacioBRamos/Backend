@@ -12,9 +12,17 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import passport from "passport";
 import initializePassport from "./auth/passport.js";
-
 import config from "./config.js";
 import { errorMiddleware } from "./services/errors/error.middleware.js";
+import { addLogger } from "./middlewares/logger.js";
+
+
+
+
+
+
+
+
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -48,7 +56,7 @@ const httpServer = app.listen(8080,()=>{
 socket.connect(httpServer)
 
 
-
+app.use(addLogger)
 
 //handlebars configuration
 app.engine('handlebars',handlebars.engine())
@@ -66,7 +74,11 @@ app.use("/api/carts",cartsRouter)
 app.use("/",viewsRouter)
 
 
-
+app.get("/loggerTest",(req,res)=>{
+    req.logger.error("ERROR")
+    req.logger.debug("WARNING")
+    res.send({message:"Esta es una prueba"})
+})
 
 dataBase.connect()
 app.use(errorMiddleware)

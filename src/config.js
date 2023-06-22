@@ -6,7 +6,8 @@ const config= {
     clientID:process.env.CLIENT_ID,
     clientSecret:process.env.CLIENT_SECRET,
     callbackUrl:process.env.CALLBACK_URL,
-    persistence:process.env.PERSISTENCE
+    persistence:process.env.PERSISTENCE,
+    devMODE:process.env.MODE
 }
 
 export default config
