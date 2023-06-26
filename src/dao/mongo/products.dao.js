@@ -8,8 +8,8 @@ export default class Product{
         return paginatedProducts;
     }
     getProductById = async(productId)=>{
-        const product = await productModel.find({_id:productId})
-        if(!product){
+        const product = await productModel.findOne({_id:productId}).lean()
+        if(!product){ 
             CustomError.generateCustomError({
                 name:ErrorName.PRINCIPAL_ERROR_NAME,
                 message:ErrorMessage.PRODUCT_ERROR_MESSAGE,
@@ -17,8 +17,9 @@ export default class Product{
             })
         }
         return product
+        
     }
-    createProduct = async(product,filename)=>{
+    createProduct = async(product,files)=>{
         const products = await productModel.find()
         const codeExist = products.find((event)=>event.code === product.code)
         if(!product.title || !product.description || !product.price || !product.code || !product.category || !product.stock){
@@ -27,17 +28,17 @@ export default class Product{
                 message:ErrorMessage.AUTHENTICATION_ERROR_MESSAGE,
                 cause:ErrorCause.PRODUCTS_ERROR_CAUSE
             })
-            return
         }
+        
         product.thumbnails = []
-        if (!filename) {
+        if (files == false) {
             throw "No se pudo cargar el archivo"
-          }else{
-            filename.forEach(file => {
+        }else{
+            files.forEach(file => {
                 const imgUrl = `http://localhost:8080/images/${file.filename}`
                 product.thumbnails.push(imgUrl)
             });
-          }
+        }
         if(codeExist){
             throw `Error: the code ${product.code} for the product already exists`
         }

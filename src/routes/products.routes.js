@@ -11,9 +11,9 @@ const router = Router()
 
 
 router.get("/",authorization("admin"),getProducts);
-router.get("/:pid",authorization("admin"),findProductById)
+router.get("/:pid",findProductById)
 
-router.post("/",uploader.array("thumbnails",5),authorization("admin"),createProduct)
+router.post("/",uploader.array("thumbnails",5),createProduct)
 
 router.put("/:pid",authorization("admin"),updateProduct)
 

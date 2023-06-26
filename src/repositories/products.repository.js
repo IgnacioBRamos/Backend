@@ -9,45 +9,40 @@ export default class ProductRepository{
           const products = await this.dao.getProducts(options);
           return products;
         } catch (error) {
-          console.log(error);
-          return null;
+          throw error
         }
     }
     getProductById = async (id) => {
-    try {
-        const product = await productDao.getProductById(id);
-        return product;
-    } catch (error) {
-        console.log(error);
-        return null;
+        try {
+            const product = await productDao.getProductById(id);
+            return product;
+        } catch (error) {
+            throw error
+        }
     }
-    }
-    createProduct = async (product,filename) => {
-    try {
-        const result = await productDao.createProduct(product,filename);
-        return result;
-    } catch (error) {
-        console.log(error);
-        return null;
-    }
+    createProduct = async (product,files) => {
+        try {
+            const result = await productDao.createProduct(product,files);
+            return result;
+        } catch (error) {
+            throw error
+        }
     }
     updateProduct = async (id, changes) => {
-    try {
-        const result = await productDao.updateProduct(id, changes);
-        return result;
-    } catch (error) {
-        console.log(error);
-        return null;
-    }
+        try {
+            const result = await productDao.updateProduct(id, changes);
+            return result;
+        } catch (error) {
+            throw error
+        }
     }
     deleteProduct = async (id) => {
-    try {
-        const result = await productDao.deleteProduct(id);
-        return result;
-    } catch (error) {
-        console.log(error);
-        return null;
-    }
+        try {
+            const result = await productDao.deleteProduct(id);
+            return result;
+        } catch (error) {
+            throw error
+        }
     }
 }
 

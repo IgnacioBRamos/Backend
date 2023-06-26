@@ -5,24 +5,45 @@ class ProductsService{
     constructor(){}
     
     getProducts(options){
-        const products = productRepository.getProducts(options)
-        return products
+        try{
+            const products = productRepository.getProducts(options)
+            return products
+        }catch(error){
+            throw error
+        }
+        
     }
     getProductById(productId){
-        const product = productRepository.getProductById(productId)
-        return product
+        try{
+            const product = productRepository.getProductById(productId)
+            return product
+        }catch(error){
+            throw error
+        }
     }
-    createProduct(product,filename){
-        const newProduct = productRepository.createProduct(product,filename)
-        return newProduct
+    createProduct(product,files){
+        try{
+            const newProduct = productRepository.createProduct(product,files)
+            return newProduct
+        }catch(error){
+            throw error
+        }
     }
     updateProduct(idProduct,changes){
-        const updatedProduct = productRepository.updateProduct(idProduct,changes)
-        return updatedProduct
+        try{
+            const updatedProduct = productRepository.updateProduct(idProduct,changes)
+            return updatedProduct
+        }catch(error){
+            throw error
+        }
     }
     deleteProduct(idProduct){
-        const productDeleted = productRepository.deleteProduct(idProduct)
-        return productDeleted
+        try{
+            const productDeleted = productRepository.deleteProduct(idProduct)
+            return productDeleted
+        }catch(error){
+            throw error
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 export const ErrorName = {
-    PRINCIPAL_ERROR_NAME: "Pricipal error"
+    PRINCIPAL_ERROR_NAME: "Principal error"
 }
 
 export const ErrorMessage ={
