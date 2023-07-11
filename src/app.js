@@ -15,11 +15,8 @@ import initializePassport from "./auth/passport.js";
 import config from "./config.js";
 import { errorMiddleware } from "./services/errors/error.middleware.js";
 import { addLogger } from "./middlewares/logger.js";
-
-
-
-
-
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUiExpress from "swagger-ui-express"
 
 
 
@@ -49,9 +46,19 @@ const httpServer = app.listen(8080,()=>{
 
 
 
+const swaggeroptions={
+    definition:{
+        openapi: "3.0.1",
+        info:{
+            title:"",
+            description:""
+        }
+    },
+    apis:[`${__dirname}/docs/**/*.yaml`]
+}
 
-
-
+const spec = swaggerJSDoc(swaggeroptions)
+app.use("/apidocs",swaggerUiExpress.serve,swaggerUiExpress.setup(spec))
 
 socket.connect(httpServer)
 

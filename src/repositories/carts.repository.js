@@ -4,28 +4,38 @@ class CartRepository {
     constructor(){}
 
     createCart(cart){
-        const newCart = cartDao.createCart(cart)
-        return newCart
+        try{
+            const newCart = cartDao.createCart(cart)
+            return newCart
+        }catch(error){
+            return error
+        }
+
     }
     getCartById(id){
-        const cart = cartDao.getCartById(id)
-        return cart
+        try{
+            const cart = cartDao.getCartById(id)
+            return cart
+        }catch(error){
+            return error
+        }
+
     }
 
     addProductInsideCart = async(cartId,productId,quantity)=>{
         const newProduct = await cartDao.addProductInsideCart(cartId,productId,quantity)
         return newProduct
     }
-    updateQuantity(cartId,productId,quantity){
-        const updatedProduct = cartDao.updateQuantity(cartId,productId,quantity)
+    async updateQuantity(cartId,productId,quantity){
+        const updatedProduct = await cartDao.updateQuantity(cartId,productId,quantity)
         return updatedProduct
     }
-    emptyCart(cartId){
-        const cartEmptied = cartDao.emptyCart(cartId)
+    async emptyCart(cartId){
+        const cartEmptied = await cartDao.emptyCart(cartId)
         return cartEmptied
     }
-    deleteProduct(productId,cid){
-        const productDeleted = cartDao.deleteProduct(productId,cid)
+    async deleteProduct(productId,cid){
+        const productDeleted = await cartDao.deleteProduct(productId,cid)
         return productDeleted
     }
     purchase = async (cartId, currentUser) => {
@@ -33,8 +43,7 @@ class CartRepository {
           const result = await cartDao.purchase(cartId, currentUser)
           return result
         } catch (error) {
-          console.log(error)
-          return null
+          return error
         }
       }
 }

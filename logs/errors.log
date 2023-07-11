@@ -1,109 +1,34 @@
-
-[34minfo[39m: GET en /loggerTest - 6/22/2023
-[34minfo[39m: GET en /loggerTest - 6/22/2023
-[31merror[39m: ERROR
-[34minfo[39m: GET en /loggerTest - 6/22/2023
-[31merror[39m: ERROR
-[37mdebug[39m: WARNING
-[34minfo[39m: GET en /loggerTest - 6/22/2023
-[37mdebug[39m: WARNING
-[31merror[39m: ERROR
-[34minfo[39m: GET en /loggerTest - 6/22/2023
-[37mdebug[39m: WARNING
-[31merror[39m: ERROR
-[34minfo[39m: GET en /loggerTest - 6/22/2023
-[31merror[39m: ERROR
-[37mdebug[39m: WARNING
-[34minfo[39m: GET en /loggerTest - 6/22/2023
-[31merror[39m: ERROR
-[37mdebug[39m: WARNING
-[34minfo[39m: GET en /loggerTest - 6/22/2023
-[31merror[39m: ERROR
-[37mdebug[39m: WARNING
-[34minfo[39m: GET en /api/products/64343d7c6ad164486b86b43b - 6/25/2023
-[34minfo[39m: GET en /api/products/64343d7c6ad164486b86b43 - 6/25/2023
-[34minfo[39m: GET en /api/products/64343d7c6ad164486b86b43b - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e44 - 6/25/2023
-[34minfo[39m: POST en /api/products/646e8d4670e0798011af3e44 - 6/25/2023
-[34minfo[39m: POST en /api/products/646e8d4670e0798011af3e44 - 6/25/2023
-[34minfo[39m: POST en /api/products/646e8d4670e0798011af3e44 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e44 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e44 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e44 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e44 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e4 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e4b - 6/25/2023
-[34minfo[39m: GET en /api/products/64343d7c6ad164486b86b43b - 6/25/2023
-[34minfo[39m: GET en /api/products/64343d7c6ad164486b86b43b - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e44 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e44 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: GET en /api/products/646e8d4670e0798011af3e45 - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
-[34minfo[39m: POST en /api/products - 6/25/2023
+    
+[34minfo[39m: POST en /api/products/ - 29/6/2023
+[34minfo[39m: POST en /api/products/ - 29/6/2023
+[34minfo[39m: GET en /api/carts/ - 29/6/2023
+[34minfo[39m: GET en /api/cart/ - 29/6/2023
+[34minfo[39m: GET en /api/cart/6445730be656033baddf7a34 - 29/6/2023
+[34minfo[39m: GET en /api/carts/6445730be656033baddf7a34 - 29/6/2023
+[34minfo[39m: GET en /api/carts/6445730be656033baddf7a3 - 29/6/2023
+[34minfo[39m: GET en /api/carts/6445730be656033baddf7a35 - 29/6/2023
+[34minfo[39m: GET en /api/products - 29/6/2023
+[34minfo[39m: POST en /api/carts/6445730be656033baddf7a34/product/64348876758ff33120aa8723 - 29/6/2023
+[34minfo[39m: POST en /api/carts/6445730be656033baddf7a35/product/64348876758ff33120aa8723 - 29/6/2023
+[34minfo[39m: POST en /api/carts/6445730be656033baddf7a35/product/64348876758ff33120aa8723 - 29/6/2023
+[34minfo[39m: POST en /api/carts/6445730be656033baddf7a35/product/64348876758ff33120aa8723 - 29/6/2023
+[34minfo[39m: POST en /api/carts/6445730be656033baddf7a35/product/64348876758ff33120aa8723 - 29/6/2023
+[34minfo[39m: POST en /api/carts/6445730be656033baddf7a35/product/64348876758ff33120aa8723 - 29/6/2023
+[34minfo[39m: GET en /api/products/ - 10/7/2023
+[34minfo[39m: GET en /api/products/sdfsd - 10/7/2023
+[34minfo[39m: GET en /api/products/ - 10/7/2023
+[34minfo[39m: GET en /api/products/ - 10/7/2023
+[34minfo[39m: GET en /api/products/64348876758ff33120aa8723 - 10/7/2023
+[34minfo[39m: GET en /api/products/64348876758ff33120aa8723 - 10/7/2023
+[34minfo[39m: GET en /api/products/ - 10/7/2023
+[34minfo[39m: PUT en /api/products/64348876758ff33120aa8723 - 10/7/2023
+[34minfo[39m: PUT en /api/products/64348876758ff33120aa8723 - 10/7/2023
+[34minfo[39m: PUT en /api/products/64348876758ff33120aa8723 - 10/7/2023
+[34minfo[39m: GET en /api/products/ - 10/7/2023
+[34minfo[39m: GET en /api/products/ - 10/7/2023
+[34minfo[39m: GET en /api/products/64348876758ff33120aa8723 - 10/7/2023
+[34minfo[39m: GET en /api/products/ - 10/7/2023
+[34minfo[39m: PUT en /api/products/64348876758ff33120aa8723 - 10/7/2023
+[34minfo[39m: GET en /api/products/ - 10/7/2023
+[34minfo[39m: GET en /api/products/64348876758ff33120aa8723 - 10/7/2023
+[34minfo[39m: GET en /api/products/64348876758ff33120aa8723 - 10/7/2023

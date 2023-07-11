@@ -1,0 +1,142 @@
+paths:
+  /api/products/:
+    get:
+      summary: obtiene todos los productos
+      tags:
+        - Products:
+      responses:
+        "200":
+          description: "Los productos fueron encontrados"
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#components/schemas/Products'
+        "500":
+          description: "Error en la conexion con la base de datos"
+  /api/products/{pid}:
+    get:
+      summary: obtiene Un solo producto a partir de su id
+      tags:
+        - Products:
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del usuario que se dea solicitar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: "Producto Encontrado"
+          content:
+            application/json:
+              schema: 
+                  $ref: '#components/schemas/Products'
+        "500":
+          description: "Error en la conexion con la base de datos"
+    put:
+      summary: Actualiza el producto mediante su id
+      tags: 
+        - Products:
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del producto que se desea solicitar
+          schema:
+            $type: String
+      requestBody:
+        required: True
+        content:
+          aplication/json:
+            schema:
+              $ref: '#components/requestBodies/updateProduct'
+      responses:
+        "200":
+          description: "Producto actualizado"
+          content:
+            application/json:
+              schema: 
+                  $ref: '#components/schemas/Products'
+        "500":
+          description: "Error en la conexion con la base de datos"
+
+
+
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por mongo
+        title:
+          type: String
+          description: Nombre del producto
+        description:
+          type: String
+          description: Descripcion del producto
+        price:
+          type: Number
+          description: Precio del producto
+        code:
+          type: String
+          description: Codigo del producto autogenerado y unico
+        category:
+          type: String
+          description: Categoria del producto
+        stock:
+          type: Number
+          description: Cantidad del producto
+        status:
+          type: Boolean
+          description: status del producto. True por default
+        thumbnails:
+          type: Array
+          description: Fotos del producto
+      example:
+        _id: ObjectId("fsd956fs9f6s5fs69fs")
+        title: Volkswagen Fox
+        description:  Aleman
+        price: 300
+        code: sjwfwefjwo
+        category: Autos
+        stock: "20"
+        status: True
+        thumbnails: [168212903843094309-volkswagen.jpg]
+  requestBodies:
+    updateProduct:
+      type: Object
+      properties:
+        title:
+          type: String
+          description: Nombre del producto
+        description:
+          type: String
+          description: Descripcion del producto
+        price:
+          type: Number
+          description: Precio del producto
+        category:
+          type: String
+          description: Categoria del producto
+        stock:
+          type: Number
+          description: Cantidad del producto
+        status:
+          type: Boolean
+          description: status del producto. True por default
+        thumbnails:
+          type: Array
+          description: Fotos del producto
+      example:
+        title: Capuccino
+        description:  Fuerte y Suave
+        price: 400
+        category: Cafe
+        stock: 20
+        status: True
+        thumbnails: [http://localhost:8080/images/1681164406818-capuccino.jpg]

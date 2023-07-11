@@ -3,8 +3,6 @@ import { productService } from "../services/products.service.js";
 
 
 export  async function getProducts (req,res){
-    
-
         const options = {
             query: {},
             pagination: {

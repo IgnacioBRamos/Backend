@@ -28,9 +28,7 @@ export async function addProductInsideCart(req,res){
     let {quantity} = req.body
     try{
         arrInterno = await cartService.addProductInsideCart(cartId,productId,quantity)
-        return res
-                .status(200)
-                .send({status: `Success`, message: arrInterno});
+        return res.status(200).send({status: `Success`, message: arrInterno});
     }catch(error){
         res.status(404).send({ status:"Error", message: error})
     }
@@ -63,7 +61,7 @@ export async function deleteProduct(req,res){
     const {cid} = req.params
     const productId = req.params.pid
     try{
-        deletedProduct = await cartService.deleteProduct(productId,cid)
+        const deletedProduct = await cartService.deleteProduct(productId,cid)
         return res.status(200).send({status: `Success`, message: deletedProduct});
     }catch(error){
         res.status(404).send({ status:"Error", message: error})

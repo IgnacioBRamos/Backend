@@ -32,7 +32,7 @@ export default class Cart {
             const cart = await cartModel.findOne({ _id: cartId });
             const parsedQuantity = Number(quantity);
             if (!cart) {
-                return { error: `No se encontró el carrito.` };
+                throw "Cart Not Found";
             }
 
             const existingProductIndex = cart.products.findIndex(
@@ -48,7 +48,7 @@ export default class Cart {
             const updatedCart = await cart.save();
             return updatedCart;
         } catch (error) {
-            return console.log(error);
+            throw error
         }
     }
 

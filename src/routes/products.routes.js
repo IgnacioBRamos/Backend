@@ -10,12 +10,12 @@ const router = Router()
 
 
 
-router.get("/",authorization("admin"),getProducts);
+router.get("/",getProducts);
 router.get("/:pid",findProductById)
 
 router.post("/",uploader.array("thumbnails",5),createProduct)
 
-router.put("/:pid",authorization("admin"),updateProduct)
+router.put("/:pid",updateProduct)
 
 router.delete("/:pid",authorization("admin"),deleteProduct)
 
