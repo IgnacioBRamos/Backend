@@ -15,6 +15,16 @@ paths:
                   $ref: '#components/schemas/Products'
         "500":
           description: "Error en la conexion con la base de datos"
+    post:
+      summary: Crea un producto
+      tags:
+        - Products:
+      requestBody:
+        required: True
+        content: 
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/createProduct"      
   /api/products/{pid}:
     get:
       summary: obtiene Un solo producto a partir de su id
@@ -24,7 +34,7 @@ paths:
         - name: pid
           in: path
           required: true
-          description: id del usuario que se dea solicitar
+          description: id del usuario que se desea solicitar
           schema:
             $type: String
       responses:
@@ -50,7 +60,7 @@ paths:
       requestBody:
         required: True
         content:
-          aplication/json:
+          application/json:
             schema:
               $ref: '#components/requestBodies/updateProduct'
       responses:
@@ -62,7 +72,22 @@ paths:
                   $ref: '#components/schemas/Products'
         "500":
           description: "Error en la conexion con la base de datos"
-
+    delete:
+      summary: Elimina un producto mediante su Id
+      tags:
+        - Products:
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del usuario que se desea eliminar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: "Producto Eliminado"
+        "500":
+          description: "Error en la conexion con la base de datos"
 
 
 components:
@@ -136,6 +161,41 @@ components:
         title: Capuccino
         description:  Fuerte y Suave
         price: 400
+        category: Cafe
+        stock: 20
+        status: True
+        thumbnails: [http://localhost:8080/images/1681164406818-capuccino.jpg]
+    createProduct:
+      properties:
+        title:
+          type: String
+          description: Nombre del producto
+        description:
+          type: String
+          description: Descripcion del producto
+        price:
+          type: Number
+          description: Precio del producto
+        code:
+          type: String
+          description: Codigo unico del producto
+        category:
+          type: String
+          description: Categoria del producto
+        stock:
+          type: Number
+          description: Cantidad del producto
+        status:
+          type: Boolean
+          description: status del producto. True por default
+        thumbnails:
+          type: Array
+          description: Fotos del producto
+      examples:
+        title: Capuccino
+        description:  Fuerte y Suave
+        price: 400
+        code: fmuiweoskl
         category: Cafe
         stock: 20
         status: True

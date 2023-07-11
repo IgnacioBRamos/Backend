@@ -7,8 +7,8 @@ class CartService{
         const newCart = cartRepository.createCart(cart)
         return newCart
     }
-    getCartById(id){
-        const cart = cartRepository.getCartById(id)
+    getCartById(cartId){
+        const cart = cartRepository.getCartById(cartId)
         return cart
     }
 
@@ -16,9 +16,13 @@ class CartService{
         const newProduct = await cartRepository.addProductInsideCart(cartId,productId,quantity)
         return newProduct
     }
-    updateQuantity(cartId,productId,quantity){
-        const updatedProduct = cartRepository.updateQuantity(cartId,productId,quantity)
-        return updatedProduct
+    async updateQuantity(cartId,productId,quantity){
+        try {
+            const updatedProduct = await cartRepository.updateQuantity(cartId,productId,quantity)
+            return updatedProduct
+        }catch(error){
+            throw error
+        }
     }
     emptyCart(cartId){
         const cartEmptied = cartRepository.emptyCart(cartId)

@@ -38,11 +38,10 @@ export async function addProductInsideCart(req,res){
 export async function updateQuantity(req,res){
     const cartId = req.params.cid
     const productId = req.params.pid
-    const quantity = req.body.quantity
-    console.log(quantity)
+    const {quantity} = req.body
     try{
-        updatedProduct = await cartService.updateQuantity(cartId,productId,quantity)
-        return res.status(200).send({status: `Success`, payload: updatedProduct});
+        const updatedProduct = await cartService.updateQuantity(cartId,productId,quantity)
+        return res.status(200).send({status: "Success", payload: updatedProduct});
     }catch(error){
         res.status(404).send({ status:"Error", message: error})
     }
@@ -51,7 +50,7 @@ export async function updateQuantity(req,res){
 export async function emptyCart(req,res){
     const {cid} = req.params
     try{
-        deletedCart = await cartService.emptyCart(cid)
+        const deletedCart = await cartService.emptyCart(cid)
         return res.status(200).send({status: `Success`, message: deletedCart});
     }catch(error){
         res.status(404).send({ status:"Error", message: error})

@@ -6,11 +6,8 @@ const router = Router()
 
 
 router.post("/",createCart)
-
 router.get("/:cid",getCartById)
-
 router.post("/:cid/purchase",purchase)
-
 router.post("/:cid/product/:pid",addProductInsideCart)
 router.delete("/:cid/products/:pid",deleteProduct)
 router.delete("/:cid",emptyCart)

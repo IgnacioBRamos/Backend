@@ -12,9 +12,9 @@ class CartRepository {
         }
 
     }
-    getCartById(id){
+    getCartById(cartId){
         try{
-            const cart = cartDao.getCartById(id)
+            const cart = cartDao.getCartById(cartId)
             return cart
         }catch(error){
             return error
@@ -27,8 +27,12 @@ class CartRepository {
         return newProduct
     }
     async updateQuantity(cartId,productId,quantity){
-        const updatedProduct = await cartDao.updateQuantity(cartId,productId,quantity)
-        return updatedProduct
+        try{
+            const updatedProduct = await cartDao.updateQuantity(cartId,productId,quantity)
+            return updatedProduct
+        }catch(error){
+            throw error
+        }
     }
     async emptyCart(cartId){
         const cartEmptied = await cartDao.emptyCart(cartId)

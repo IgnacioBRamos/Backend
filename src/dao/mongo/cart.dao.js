@@ -19,8 +19,8 @@ export default class Cart {
         return carts
     }
     
-    getCartById= async(productId) =>{
-        const cart = await cartModel.findOne({_id:productId}).populate("products.product").lean();
+    getCartById = async(cartId) =>{
+        const cart = await cartModel.findOne({_id:cartId}).populate("products.product").lean();
         if(!cart){
             throw "Cart not Found"
         }else{
@@ -52,18 +52,17 @@ export default class Cart {
         }
     }
 
-    updateQuantity= async(cartId,productId,quantity)=>{
-        const cart = await cartModel.getCartById(cartId)
-        if (!cart) {
-            throw "cart not found"
-        }
-        const product = cart.products.find((product) => product.id === productId)
-        if (!product) {
-            throw "Product not found"
-        }
-        product.quantity = quantity
-        await cart.save()
-        return cart
+    updateQuantity = async(cartId,productId,quantity)=>{
+        try {
+            const updatedCart = await cartModel.updateOne(
+              { _id: cartId },
+              { $inc: { "products.$[elem].quantity": quantity } },
+              { arrayFilters: [{ "elem.product": productId }] }
+            )
+            return "Cart Actualizado"
+          } catch (error) {
+            console.log(error);
+          }
     }
 
     emptyCart=async(cartId)=>{

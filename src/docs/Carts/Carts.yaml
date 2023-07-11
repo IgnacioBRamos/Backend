@@ -1,0 +1,99 @@
+paths: 
+  /api/carts/{cid}:
+    get:
+      summary: obtiene Un solo carrito a partir de su id
+      tags:
+        - Carts:
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito que se desea solicitar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: "cart Encontrado"
+          content:
+            application/json:
+              schema: 
+                  $ref: '#components/schemas/Carts'
+        "500":
+          description: "Error en la conexion con la base de datos"
+  /api/carts/{cid}/products/{pid}:
+    put:
+      summary: Primero busca el carrito por su id y luego se busca el producto mediante su id y se actualiza la quantity
+      tags: 
+        - Carts:
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito desea usar
+          schema:
+            $type: String
+        - name: pid
+          in: path
+          required: true
+          description: id del producto que se desea actualizar
+          schema:
+            $type: String
+      requestBody:
+        required: True
+        content:
+          aplication/json:
+            schema:
+              $ref: '#components/requestBodies/updateProductQuantity'
+      responses:
+        "200":
+          description: "Producto actualizado"
+          content:
+            application/json:
+              schema: 
+                  $ref: '#components/schemas/Carts'
+        "500":
+          description: "Error en la conexion con la base de datos"
+
+
+
+components:
+  schemas:
+    Carts:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por mongo
+        products:
+          type: Array
+          description: array de objetos de productos dentro del carrito y cada producto con su quantity
+      example:
+        _id: ObjectId("fsd956fs9f6s5fs69fs")
+        products: [
+          {
+            product: 
+              {
+                "_id": "64348876758ff33120aa8723",
+                  "title": "Capuccino",
+                  "description": "suave y dulce",
+                  "price": 300,
+                  "code": "erghtgh",
+                  "category": "cafe",
+                  "stock": 20,
+                  "status": true,
+                  "thumbnails": [
+                      "http://localhost:8080/images/1681164406818-capuccino.jpg"
+                  ]
+              },
+              quantity: 3
+          }
+        ]
+  requestBodies:
+    updateProductQuantity:
+      type: Object
+      properties:
+        quantity:
+          type: Number
+          description: quantity ha actualizar
+      example:
+        quantity: 3
