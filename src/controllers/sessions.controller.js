@@ -9,7 +9,7 @@ export async function login(req,res){
         age:req.user.age,
         email:req.user.email
     }
-    res.send({status:"Success",payload:req.session.user})
+    res.send({status:"Success",message: "Logged In", payload:req.session.user})
 }
 
 export async function logout (req,res){

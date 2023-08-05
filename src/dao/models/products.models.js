@@ -22,6 +22,10 @@ const productSchema = new mongoose.Schema({
         default: true
     },
     thumbnails: Array,
+    owner: {
+        type: String,
+        default: "admin"
+    }
 })
 productSchema.plugin(mongoosePaginate)
 const productModel = mongoose.model(productsCollection,productSchema)

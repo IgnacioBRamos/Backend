@@ -3,21 +3,21 @@ import {Router} from "express"
 import { generateProduct, uploader } from "../utils.js";
 
 import { getProducts,findProductById,createProduct,deleteProduct, updateProduct} from "../controllers/products.controller.js";
-import { authorization } from "../middlewares/auth.js";
+import { authorization, checkLogin } from "../middlewares/auth.js";
 
 const router = Router()
 
 
 
 
-router.get("/",getProducts);
+router.get("/",checkLogin,getProducts);
 router.get("/:pid",findProductById)
 
-router.post("/",uploader.array("thumbnails",5),createProduct)
+router.post("/",checkLogin,authorization(["admin","premium"]),uploader.array("thumbnails",5),createProduct)
 
-router.put("/:pid",updateProduct)
+router.put("/:pid",checkLogin,authorization(["admin","premium"]),updateProduct)
 
-router.delete("/:pid",authorization("admin"),deleteProduct)
+router.delete("/:pid",checkLogin,authorization(["admin","premium"]),deleteProduct)
 
 
 

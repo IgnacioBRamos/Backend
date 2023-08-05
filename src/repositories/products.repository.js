@@ -20,9 +20,9 @@ export default class ProductRepository{
             throw error
         }
     }
-    createProduct = async (product,files) => {
+    createProduct = async (product,files,user) => {
         try {
-            const result = await productDao.createProduct(product,files);
+            const result = await productDao.createProduct(product,files,user);
             return result;
         } catch (error) {
             throw error

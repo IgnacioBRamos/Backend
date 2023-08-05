@@ -10,9 +10,9 @@ function checkLogged(req, res, next) {
 
 function authorization(rol){
     return (req, res, next) => {
-        console.log(req.user.role)
-        if(req.user.role !== rol){
-            return res.status(400).send({status:"Error",message: error})
+        const prueba = rol.some(el => el == req.user.role)
+        if(prueba != true){
+            return res.status(400).send({status:"Error",message: "You are not authorized"})
         }
         next()
     }

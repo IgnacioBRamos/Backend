@@ -1,4 +1,4 @@
-
+import { use } from "chai";
 import { productService } from "../services/products.service.js";
 
 
@@ -34,11 +34,13 @@ export  async function getProducts (req,res){
             hasNextPage,
             } = await productService.getProducts(options);
     
-            const link = "/products?page=";
+            let limit = options.pagination.limit
+            const link = `/products/?limit=${limit}&page=`;
     
             const prevLink = hasPrevPage ? link + prevPage : link + page;
             const nextLink = hasNextPage ? link + nextPage : link + page;
-    
+
+            console.log(req.session.user)
             return res.status(200).send({
             status: "sucess",
             payload: products,
@@ -70,8 +72,9 @@ export async function findProductById(req,res){
 export async function createProduct(req,res){
     const products = req.body
     const files = req.files
+    const user = req.user
     try{
-        const createdProduct = await productService.createProduct(products,files)
+        const createdProduct = await productService.createProduct(products,files,user)
         return res.send({status:"Success",payload:createdProduct})
     }catch(error){
         return res.status(400).send({status:"Error",payload: error})

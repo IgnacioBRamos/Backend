@@ -1,6 +1,6 @@
 import { productModel } from "../models/products.models.js";
-import CustomError from "../../services/errors/customError.js";
-import { ErrorMessage,ErrorCause,ErrorName } from "../../services/errors/error.enum.js";
+import CustomError from "../../errors/customError.js";
+import { ErrorMessage,ErrorCause,ErrorName } from "../../errors/error.enum.js";
 export default class Product{
     getProducts = async(options)=>{
         const { query, pagination } = options;
@@ -19,7 +19,7 @@ export default class Product{
         return product
         
     }
-    createProduct = async(product,files)=>{
+    createProduct = async(product,files,user)=>{
         const products = await productModel.find()
         const codeExist = products.find((event)=>event.code === product.code)
         if(!product.title || !product.description || !product.price || !product.code || !product.category || !product.stock){
@@ -41,6 +41,9 @@ export default class Product{
         }
         if(codeExist){
             throw `Error: the code ${product.code} for the product already exists`
+        }
+        if(user.role == "premium"){
+            product.owner = user.email
         }
 
         const createdProduct = await productModel.create(product)

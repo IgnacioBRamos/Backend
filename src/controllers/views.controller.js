@@ -36,8 +36,8 @@ export async function renderProducts(req, res){
         hasPrevPage,
         hasNextPage,
       } = await productDao.getProducts(options);
-    
-      const link = "/products/?page=";
+      let limit = options.pagination.limit
+      const link = `/products/?limit=${limit}&page=`;
     
       const prevLink = hasPrevPage ? link + prevPage : link + page;
       const nextLink = hasNextPage ? link + nextPage : link + page;
@@ -58,8 +58,7 @@ export async function renderProducts(req, res){
 export async function renderCart(req,res){
     let cartId = req.params.cid
     try{
-        let cart = await cartDao.findCartById(cartId)
-        console.log(cart.products)
+        let cart = await cartDao.getCartById(cartId)
         res.render('cart',{products:cart.products})
         
         

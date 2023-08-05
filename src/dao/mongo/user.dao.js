@@ -1,11 +1,18 @@
 import userModel from "../models/users.model.js";
 
 export default class User {
-  constructor() {}
-
-  getUserById = async (filter) => {
+  constructor() { }
+  getUsers = async ()=>{
+    try{
+      const usersFound = await userModel.find()
+      return usersFound
+    }catch(error){
+      console.log(error)
+    }
+  }
+  getUserById = async (id) => {
     try {
-      const foundUser = await userModel.findOne(filter);
+      const foundUser = await userModel.findOne({ _id: id }).lean();
       return foundUser;
     } catch (error) {
       console.log(error);
@@ -20,4 +27,31 @@ export default class User {
       console.log(error);
     }
   };
+  changeUserRole = async (uid) => {
+    
+    try {
+      const user = await userModel.findOne({ _id: uid }).lean()
+      if(!user){
+        throw "User not found"
+      }
+      if(user.role == "premium"){
+        const changes = {
+          ...user,
+          role: "user"
+        }
+        const userChanged = await userModel.updateOne({ _id: uid }, changes)
+        return user
+      }else{
+        const changes = {
+          ...user,
+          role: "premium"
+        }
+        const userChanged = await userModel.updateOne({ _id: uid }, changes)
+        return user
+      }
+    }
+    catch (error) {
+      throw error
+    }
+  }
 }

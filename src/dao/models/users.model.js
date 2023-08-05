@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     cart: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "carts",
-      }
+      },
 })
 
 const userModel = mongoose.model(userCollection,userSchema)

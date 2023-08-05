@@ -45,7 +45,11 @@ const initializePassport = ()=>{
             if(!user){
                 return done(null, false)
             }
-            if(!isValidPassword(user,password)) return done(null,false)
+            if(!isValidPassword(user,password)) {
+                console.error("incorrect Credentials")
+                return done(null,false)
+            }
+
             delete user.password
             return done(null,user)
         }catch(error){

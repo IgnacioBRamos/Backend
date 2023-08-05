@@ -21,9 +21,9 @@ class ProductsService{
             throw error
         }
     }
-    createProduct(product,files){
+    createProduct(product,files,user){
         try{
-            const newProduct = productRepository.createProduct(product,files)
+            const newProduct = productRepository.createProduct(product,files,user)
             return newProduct
         }catch(error){
             throw error

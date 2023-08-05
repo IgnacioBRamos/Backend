@@ -5,6 +5,7 @@ import productsRouter from "./routes/products.routes.js"
 import cartsRouter from "./routes/cart.routes.js"
 import viewsRouter from "./routes/views.routes.js"
 import messageRouter from "./routes/messages.routes.js"
+import usersRouter from "./routes/users.routes.js"
 import socket from "./socket.js";
 import dataBase from "./db.js";
 import sessionsRouter from "./routes/sessions.routes.js"
@@ -13,7 +14,7 @@ import MongoStore from "connect-mongo";
 import passport from "passport";
 import initializePassport from "./auth/passport.js";
 import config from "./config.js";
-import { errorMiddleware } from "./services/errors/error.middleware.js";
+import { errorMiddleware } from "./errors/error.middleware.js";
 import { addLogger } from "./middlewares/logger.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express"
@@ -73,7 +74,7 @@ app.set('view engine','handlebars')
 
 
 
-
+app.use("/api/users",usersRouter)
 app.use("/api/sessions",sessionsRouter)
 app.use("/api/messages",messageRouter)
 app.use("/api/products",productsRouter)
