@@ -27,14 +27,19 @@ export default class Cart {
             return cart
         }
     }
-    addProductInsideCart=async(cartId,productId,quantity)=>{
-        try {
+    addProductInsideCart=async(cartId,productId,quantity,user)=>{
             const cart = await cartModel.findOne({ _id: cartId });
-            const parsedQuantity = Number(quantity);
+            const parsedQuantity = quantity;
+            const product = await productDao.getProductById(productId)
             if (!cart) {
                 throw "Cart Not Found";
             }
-
+            if(!product){
+                throw "product not found"
+            }
+            if(product.owner == user.email){
+                throw "You cannot add your own products"
+            }
             const existingProductIndex = cart.products.findIndex(
                 (product) => product.product && product.product._id.toString() === productId
             );
@@ -46,23 +51,21 @@ export default class Cart {
             }
 
             const updatedCart = await cart.save();
-            return updatedCart;
-        } catch (error) {
-            throw error
-        }
+            
+            return updatedCart   
     }
 
     updateQuantity = async(cartId,productId,quantity)=>{
         try {
             const updatedCart = await cartModel.updateOne(
-              { _id: cartId },
-              { $inc: { "products.$[elem].quantity": quantity } },
-              { arrayFilters: [{ "elem.product": productId }] }
+                { _id: cartId },
+                { $inc: { "products.$[elem].quantity": quantity } },
+                { arrayFilters: [{ "elem.product": productId }] }
             )
             return "Cart Actualizado"
-          } catch (error) {
-            console.log(error);
-          }
+        } catch (error) {
+            throw error
+        }
     }
 
     emptyCart=async(cartId)=>{

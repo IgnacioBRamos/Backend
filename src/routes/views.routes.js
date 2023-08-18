@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { renderCart, renderMessages, renderProducts } from "../controllers/views.controller.js";
 import { checkLogged,checkLogin } from "../middlewares/auth.js";
-
+import { usersService } from "../services/users.service.js";
 const router = Router()
 
 
@@ -29,7 +29,15 @@ router.get("/login",checkLogged,(req,res)=>{
 })
 
 
-router.get("/current",checkLogin, (req, res) => {
-  res.render("profile", { user: req.session.user });
+router.get("/current",checkLogin, async (req, res) => {
+  const id = req.user._id
+  const user = await usersService.getUserById(id)
+  const profile = "" ?? user.documents.find(el=>el.reference.endsWith(".jpg")) 
+  res.render("profile", {
+    full_name:user.full_name,
+    age: user.age,
+    email:user.email,
+    documents: profile.reference
+  })
 });
 export default router

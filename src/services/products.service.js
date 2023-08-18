@@ -37,9 +37,9 @@ class ProductsService{
             throw error
         }
     }
-    deleteProduct(idProduct){
+    deleteProduct(idProduct,user){
         try{
-            const productDeleted = productRepository.deleteProduct(idProduct)
+            const productDeleted = productRepository.deleteProduct(idProduct,user)
             return productDeleted
         }catch(error){
             throw error

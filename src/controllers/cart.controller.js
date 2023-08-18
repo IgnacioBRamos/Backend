@@ -26,9 +26,10 @@ export async function addProductInsideCart(req,res){
     let cartId = req.params.cid
     let productId = req.params.pid
     let {quantity} = req.body
+    const user = req.user
     try{
-        arrInterno = await cartService.addProductInsideCart(cartId,productId,quantity)
-        return res.status(200).send({status: `Success`, message: arrInterno});
+        const arrInterno = await cartService.addProductInsideCart(cartId,productId,quantity,user)
+        return res.status(200).send({status: "Success", payload: arrInterno});
     }catch(error){
         res.status(404).send({ status:"Error", message: error})
     }

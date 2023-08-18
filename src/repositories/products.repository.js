@@ -36,9 +36,9 @@ export default class ProductRepository{
             throw error
         }
     }
-    deleteProduct = async (id) => {
+    deleteProduct = async (id,user) => {
         try {
-            const result = await productDao.deleteProduct(id);
+            const result = await productDao.deleteProduct(id,user);
             return result;
         } catch (error) {
             throw error

@@ -1,4 +1,4 @@
-import { use } from "chai";
+
 import { productService } from "../services/products.service.js";
 
 
@@ -75,7 +75,7 @@ export async function createProduct(req,res){
     const user = req.user
     try{
         const createdProduct = await productService.createProduct(products,files,user)
-        return res.send({status:"Success",payload:createdProduct})
+        return res.send({status:"Success",message:"Product added",payload:createdProduct})
     }catch(error){
         return res.status(400).send({status:"Error",payload: error})
     }
@@ -95,8 +95,9 @@ export async function updateProduct(req,res){
 
 export async function deleteProduct(req,res){
     const {pid}= req.params
+    const user = req.user
     try{
-        await productService.deleteProduct(pid)
+        await productService.deleteProduct(pid,user)
         return res.status(200).send({status:"OK",message:"Product succesfully deleted"})
     }
     catch(error){

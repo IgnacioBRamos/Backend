@@ -5,7 +5,7 @@ import userModel from "../dao/models/users.model.js";
 import { createHash, isValidPassword } from "../utils.js";
 import config from "../config.js";
 import { cartModel } from "../dao/models/carts.models.js";
-import { usersService } from "../services/index.js";
+import { usersService } from "../services/users.service.js";
 
 const {clientID,clientSecret,callbackUrl} = config
 const localStrategy =  local.Strategy
@@ -27,7 +27,7 @@ const initializePassport = ()=>{
                     age,
                     role,
                     password: createHash(password),
-                    cart:cart._id
+                    cart:cart._id,
                 }
                 if (newUser.email== "adminCoder@coder.com"){
                     newUser.role= "admin"

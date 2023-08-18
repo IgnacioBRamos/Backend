@@ -5,6 +5,7 @@ import { cartDao } from "../dao/mongo/index.js";
 
 
 export async function renderProducts(req, res){
+    const cart = req.user.cart
     const options = {
         query: {},
         pagination: {
@@ -43,6 +44,7 @@ export async function renderProducts(req, res){
       const nextLink = hasNextPage ? link + nextPage : link + page;
     
       return res.render("products", {
+        cart,
         products,
         totalPages,
         page,
@@ -56,11 +58,10 @@ export async function renderProducts(req, res){
 
 
 export async function renderCart(req,res){
-    let cartId = req.params.cid
+    let cartId = req.user.cart
     try{
         let cart = await cartDao.getCartById(cartId)
         res.render('cart',{products:cart.products})
-        
         
     }catch(error){
         return res

@@ -1,20 +1,16 @@
 import { Router } from "express";
-import { userDao } from "../dao/mongo/index.js";
-
+import { uploader2 } from "../utils.js";
+import { changeUserRole, getUsers, uploadDocuments } from "../controllers/users.controller.js";
 
 const router = Router()
 
 
+router.get("/",getUsers)
 
-router.put("/premium/:uid",async(req,res)=>{
-    const {uid} = req.params
-    const user = await userDao.changeUserRole(uid)
-    res.send(user)
-})
-router.get("/",async(req,res)=>{
-    const usersFound = await userDao.getUsers()
-    res.send(usersFound)
-})
+router.put("/premium/:uid",changeUserRole)
+
+router.post("/:uid/documents",uploader2.single("reference"),uploadDocuments)
+
 
 
 

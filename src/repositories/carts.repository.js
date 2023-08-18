@@ -22,9 +22,13 @@ class CartRepository {
 
     }
 
-    addProductInsideCart = async(cartId,productId,quantity)=>{
-        const newProduct = await cartDao.addProductInsideCart(cartId,productId,quantity)
-        return newProduct
+    addProductInsideCart = async(cartId,productId,quantity,user)=>{
+        try{
+            const newProduct = await cartDao.addProductInsideCart(cartId,productId,quantity,user)
+            return newProduct
+        }catch(error){
+            throw error
+        }
     }
     async updateQuantity(cartId,productId,quantity){
         try{

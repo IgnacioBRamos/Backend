@@ -5,9 +5,10 @@ export async function login(req,res){
     req.session.user={
         first_name: req.user.first_name,
         last_name: req.user.last_name,
-        full_name:req.user.full_name,
+        full_name: req.user.full_name,
         age:req.user.age,
-        email:req.user.email
+        email:req.user.email,
+        documents:req.user.documents
     }
     res.send({status:"Success",message: "Logged In", payload:req.session.user})
 }

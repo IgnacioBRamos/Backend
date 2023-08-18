@@ -29,7 +29,7 @@ app.use("/", express.static(`${__dirname}/public`));
 app.use(session({
     store:MongoStore.create({
         mongoUrl:config.dbUrl,
-        ttl:60
+        ttl:600
     }),
     resave:false,
     saveUninitialized:true,

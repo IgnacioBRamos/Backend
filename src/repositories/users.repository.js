@@ -2,7 +2,15 @@ import { userDao } from "../dao/mongo/index.js";
 import ContactDTO from "../dao/dtos/user.dto.js";
 
 
-export default class UsersRepository {
+class UsersRepository {
+  getUsers= async ()=>{
+    try{
+      const usersFound = await userDao.getUsers()
+      return usersFound
+    }catch(error){
+      throw error
+    }
+  }
   getUserById = async (id) => {
     try {
       const user = await userDao.getUserById(id);
@@ -23,4 +31,25 @@ export default class UsersRepository {
       return null;
     }
   };
+
+  changeUserRole = async (uid)=>{
+    try{
+      const changeUserRole = await userDao.changeUserRole(uid)
+      return changeUserRole
+    }catch(error){
+      throw error
+    }
+  }
+  uploadDocuments = async(uid,name,file)=>{
+    try{
+      const documents = await userDao.uploadDocuments(uid,name,file)
+      return documents
+    }catch(error){
+      throw error
+    }
+  }
 }
+
+
+
+export const usersRepository = new UsersRepository()

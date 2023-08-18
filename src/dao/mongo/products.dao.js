@@ -29,7 +29,6 @@ export default class Product{
                 cause:ErrorCause.PRODUCTS_ERROR_CAUSE
             })
         }
-        
         product.thumbnails = []
         if (files == false) {
             throw "No se pudo cargar el archivo"
@@ -56,7 +55,19 @@ export default class Product{
         const updateProduct= await productModel.updateOne({_id:idProduct},changes)
         return updateProduct
     }
-    deleteProduct = async(idProduct)=>{
+    deleteProduct = async(idProduct,user)=>{
+        const product = await productModel.findOne({_id:idProduct}).lean()
+        if(!product){
+            throw "Product not Found"
+        }
+        if(user.role == "premium"){
+            if(product.owner == user.email){
+                const deleteProduct = await productModel.deleteOne({_id:idProduct})
+                return deleteProduct
+            }else{
+                throw "You are not authorized to delete a product that is not yours"
+            }
+        }
         const deleteProduct = await productModel.deleteOne({_id:idProduct})
         return deleteProduct
     }

@@ -17,6 +17,21 @@ const storage = multer.diskStorage({
     cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
+const storage2 = multer.diskStorage({
+  destination: function (req, file, cb) {
+    if(file.originalname.includes(".jpg"||".jepg"||".png")){
+      cb(null, `${__dirname}/public/profiles`);
+    }
+    else if(file.originalname.includes(".pdf")){
+      cb(null, `${__dirname}/public/documents`);
+    }else{
+      throw "ERROR: Tipo de archivo no valido"
+    }
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
 
 // Mock
 
@@ -42,15 +57,16 @@ export const generateProduct = ()=>{
 
 
 
-
-
-
-
 // hasheo de de password
 export const createHash = password => bcrypt.hashSync(password,bcrypt.genSaltSync(10))
 
 export const isValidPassword = (user,password)=> bcrypt.compareSync(password,user.password)
 
 
-export const uploader = multer({ storage });
+
+
+
+
+export const uploader = multer({ storage: storage });
+export const uploader2 = multer({ storage: storage2 });
 export default __dirname;

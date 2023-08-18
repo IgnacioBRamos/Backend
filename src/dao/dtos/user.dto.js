@@ -7,6 +7,7 @@ export default class ContactDTO {
       this.password = contact.password
       this.role = contact.role
       this.age = contact.age
-      this.cart = contact.cart
+      this.cart = contact.cart,
+      this.documents = contact.documents
     }
   }
