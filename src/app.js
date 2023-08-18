@@ -22,6 +22,7 @@ import swaggerUiExpress from "swagger-ui-express"
 
 
 const app = express();
+const PORT = process.env.PORT || 8080
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use("/", express.static(`${__dirname}/public`));
@@ -40,10 +41,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
-const httpServer = app.listen(8080,()=>{
-    console.log("Servidor arriba del  puerto 8080")
-
-})
+const httpServer = app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 
 
