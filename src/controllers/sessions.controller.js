@@ -1,3 +1,4 @@
+import { usersService } from "../services/users.service.js";
 
 
 export async function login(req,res){
@@ -8,16 +9,16 @@ export async function login(req,res){
         full_name: req.user.full_name,
         age:req.user.age,
         email:req.user.email,
-        documents:req.user.documents
     }
     res.send({status:"Success",message: "Logged In", payload:req.session.user})
 }
 
 export async function logout (req,res){
-    req.session.destroy(err => {
+    req.session.destroy(async err => {
         if (err) {
           console.error(err);
         } else {
+          await usersService.updateLastConnection(req.user._id)
           res.redirect('/login');
         }
       });

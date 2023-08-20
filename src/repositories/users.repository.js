@@ -48,6 +48,14 @@ class UsersRepository {
       throw error
     }
   }
+  updateLastConnection = async(uid)=>{
+    try{
+      const lastConnection = await userDao.updateLastConnection(uid)
+      return lastConnection
+    }catch(error){
+      throw error
+    }
+  }
 }
 
 

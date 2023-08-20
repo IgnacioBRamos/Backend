@@ -12,7 +12,7 @@ const ticketSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
       },
-      amount: {
+      ammount: {
         type: Number,
         required: true
       },

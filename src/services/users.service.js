@@ -44,6 +44,14 @@ class UsersService {
       throw error
     }
   }
+  updateLastConnection = async(uid)=>{
+    try{
+      const lastConnection = await usersRepository.updateLastConnection(uid)
+      return lastConnection
+    }catch(error){
+      throw error
+    }
+  }
 }
 
 

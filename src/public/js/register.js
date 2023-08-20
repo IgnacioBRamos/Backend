@@ -17,5 +17,6 @@ form.addEventListener("submit", async (e) => {
   });
 
   let result = await response.json();
+  window.location.href="/login"
   console.log(result);
 });

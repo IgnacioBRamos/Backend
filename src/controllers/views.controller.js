@@ -53,20 +53,23 @@ export async function renderProducts(req, res){
         prevLink,
         nextLink,
         title: "Products",
+        cartId: cart._id
       });
-    }
+}
 
 
 export async function renderCart(req,res){
     let cartId = req.user.cart
     try{
         let cart = await cartDao.getCartById(cartId)
-        res.render('cart',{products:cart.products})
+        res.render('cart',{
+          products:cart.products,
+          cartId: req.user.cart._id,
+          title:"Cart"
+        })
         
     }catch(error){
-        return res
-            .status(404)
-            .send({status:"Error",message: error})
+        return res.status(404).send({status:"Error",message: error})
     }
 }
 export async function renderMessages(req,res){

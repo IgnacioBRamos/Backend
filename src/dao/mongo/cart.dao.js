@@ -1,4 +1,5 @@
 import { cartModel } from "../models/carts.models.js"
+import { ticketModel } from "../models/ticket.models.js";
 import { productDao } from "./index.js"
 import { faker } from "@faker-js/faker";
 
@@ -106,14 +107,15 @@ export default class Cart {
               purchaser: currentUser,
             };
             console.log(ticket)
-            const result = await cartModel.create(ticket);
+            const result = await ticketModel.create(ticket);
       
             return result;
           } catch (error) {
-            console.log(error);
-            return null;
+            throw error
           }
         };
+    
+
     
 }
 

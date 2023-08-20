@@ -18,6 +18,7 @@ import { errorMiddleware } from "./errors/error.middleware.js";
 import { addLogger } from "./middlewares/logger.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express"
+import paymentRouter from "./routes/payment.routes.js"
 
 
 
@@ -71,7 +72,7 @@ app.set('view engine','handlebars')
 
 
 
-
+app.use("/api/payment",paymentRouter)
 app.use("/api/users",usersRouter)
 app.use("/api/sessions",sessionsRouter)
 app.use("/api/messages",messageRouter)

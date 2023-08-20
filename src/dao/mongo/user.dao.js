@@ -83,4 +83,35 @@ export default class User {
     const userChanged = await userModel.updateOne({ _id: uid }, {$push:{documents:newDocument}})
     return userChanged
   }
+
+  updateLastConnection = async (uid)=>{
+    const user = this.getUserById(uid)
+    const date = new Date()
+    const changes = {
+      ...user,
+      last_connection: date
+    }
+    await userModel.updateOne({_id:uid},changes)
+    return "Last Connection Updated"
+  }
+
+  deleteUser = async()=>{
+    const users = await this.getUsers()
+    const dateNow = Date.now()
+    let hola
+    for (const user of users) {
+      if (user.role !== "admin") {
+          const userLastConnection = user.last_connection.getTime();
+          const lastConnection = dateNow - userLastConnection;
+          
+          if (lastConnection > 172800000) {
+              await userModel.deleteOne({ _id: user._id });
+              hola = "Inactive users deleted";
+          } else {
+              hola = "There are no inactive users";
+          }
+      }
+    }
+    return hola
+  }
 }

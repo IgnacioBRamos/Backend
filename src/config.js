@@ -7,7 +7,8 @@ const config= {
     clientSecret:process.env.CLIENT_SECRET,
     callbackUrl:process.env.CALLBACK_URL,
     persistence:process.env.PERSISTENCE,
-    devMODE:process.env.MODE
+    devMODE:process.env.MODE,
+    secretKey:process.env.SECRET_KEY
 }
 
 export default config

@@ -74,7 +74,7 @@ export const purchase = async (req, res) => {
       const cartId = req.params.cid;
       const currentUser = req.user.email;
       const result = await cartService.purchase(cartId, currentUser);
-      return res.send({ status: "success", result });
+      return res.send({ status: "success", payload: result });
     } catch (error) {
       console.log(error);
     }

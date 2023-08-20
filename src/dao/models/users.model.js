@@ -30,7 +30,10 @@ const userSchema = new mongoose.Schema({
                 type:   String
             }
         }
-    ]
+    ],
+    last_connection:{
+        type: Date
+    }
 })
 
 const userModel = mongoose.model(userCollection,userSchema)
