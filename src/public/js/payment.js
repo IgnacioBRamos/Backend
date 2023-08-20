@@ -1,7 +1,7 @@
 const button = document.getElementById("checkout")
 button.addEventListener("click",async (e)=>{
     e.preventDefault();
-    const res = await fetch("http://localhost:8080/api/payment",{
+    const res = await fetch("/api/payment",{
         method: "POST"
     })
     const data = await res.json()
