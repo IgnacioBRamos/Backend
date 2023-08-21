@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { cartService } from "../services/carts.service.js";
 import PaymentService from "../payment/payments.js";
-import config from "../config.js";
+
 const router = Router()
 
 const pay = new PaymentService ()
@@ -23,8 +23,8 @@ router.post("/",async (req,res)=>{
     const data = {
         line_items: lineItems,
         mode: "payment",
-        success_url:  `https://backend-development-03f4.up.railway.app/products`,
-        cancel_url:  `https://backend-development-03f4.up.railway.app/current`
+        success_url:  "https://backend-development-03f4.up.railway.app/products" || "http://localhost:8080/current",
+        cancel_url:  "https://backend-development-03f4.up.railway.app/products"||"http://localhost:8080/current"
     }
 
 

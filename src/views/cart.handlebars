@@ -1,11 +1,11 @@
 <div>
   <h1>Cart Items</h1>
   <div class="w-50">
-    <ul class="list-group list-group-flush">
-      {{#each products}}
-        <img src= "{{this.thumbnails.[0]}}" alt="">
-        <li class="list-group-item">{{this.product.title}}: {{this.quantity}}</li>
-      {{/each}}
+    <ul class="list-group list-group-flush ">
+        {{#each products}}
+          <img src= "{{this.product.thumbnails.[0]}}" style="width:50px" alt="">
+          <li class="list-group-item">{{this.product.title}}: {{this.quantity}}</li>
+        {{/each}}
       <button id="checkout">
         pay
       </button>

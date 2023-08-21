@@ -19,12 +19,12 @@ import { addLogger } from "./middlewares/logger.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express"
 import paymentRouter from "./routes/payment.routes.js"
-import cors from "cors"
+
 
 
 const app = express();
 const PORT = process.env.PORT || 8080
-app.use(cors())
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use("/", express.static(`${__dirname}/public`));

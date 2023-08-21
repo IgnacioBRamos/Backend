@@ -1,8 +1,8 @@
-<div>
+<div class="d-flex flex-column align-items-center">
   <h1>Tu perfil</h1>
+  <h2>{{full_name}}</h2>
   <img src="{{documents}}" alt="">
-  <p>{{full_name}}</p>
-  <p>{{email}}</p>
-  <p>{{age}}</p>
-  <a href="/api/sessions/logout">logout</a>
+  <p>Email: {{email}}</p>
+  <p>Edad: {{age}}</p>
+  <a href="/api/sessions/logout"  class="btn btn-danger">logout</a>
 </div>
