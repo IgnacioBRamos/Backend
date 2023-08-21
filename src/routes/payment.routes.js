@@ -23,7 +23,7 @@ router.post("/",async (req,res)=>{
     const data = {
         line_items: lineItems,
         mode: "payment",
-        success_url:  `https://backend-development-03f4.up.railway.app/api/products`,
+        success_url:  `https://backend-development-03f4.up.railway.app/products`,
         cancel_url:  `https://backend-development-03f4.up.railway.app/current`
     }
 
