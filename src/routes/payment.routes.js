@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { cartService } from "../services/carts.service.js";
 import PaymentService from "../payment/payments.js";
+import config from "../config.js";
 const router = Router()
 
 const pay = new PaymentService ()
@@ -23,8 +24,8 @@ router.post("/",async (req,res)=>{
     const data = {
         line_items: lineItems,
         mode: "payment",
-        success_url: `http://localhost:${process.env.PORT || 8080}/api/products`,
-        cancel_url: `http://localhost:${process.env.PORT || 8080}/current`
+        success_url: config.success || "http://localhost:8080/api/products",
+        cancel_url: config.cancel || "http://localhost:8080/current"
     }
 
 

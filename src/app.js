@@ -19,10 +19,11 @@ import { addLogger } from "./middlewares/logger.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express"
 import paymentRouter from "./routes/payment.routes.js"
-
+import cors from "cors"
 
 
 const app = express();
+app.use(cors())
 const PORT = process.env.PORT || 8080
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

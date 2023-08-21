@@ -8,7 +8,9 @@ const config= {
     callbackUrl:process.env.CALLBACK_URL,
     persistence:process.env.PERSISTENCE,
     devMODE:process.env.MODE,
-    secretKey:process.env.SECRET_KEY
+    secretKey:process.env.SECRET_KEY,
+    success: process.env.SUCCESS_URL,
+    cancel:process.env.CANCEL_URL
 }
 
 export default config
