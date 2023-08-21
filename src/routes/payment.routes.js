@@ -23,8 +23,8 @@ router.post("/",async (req,res)=>{
     const data = {
         line_items: lineItems,
         mode: "payment",
-        success_url:  "https://backend-development-03f4.up.railway.app/products" || "http://localhost:8080/current",
-        cancel_url:  "https://backend-development-03f4.up.railway.app/products"||"http://localhost:8080/current"
+        success_url:  "https://backend-production-46ea.up.railway.app/products" || "http://localhost:8080/current",
+        cancel_url:  "https://backend-production-46ea.up.railway.app/products"||"http://localhost:8080/current"
     }
 
 
