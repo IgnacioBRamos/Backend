@@ -20,12 +20,11 @@ router.post("/",async (req,res)=>{
         },
         quantity: element.quantity
     }));
-    
     const data = {
         line_items: lineItems,
         mode: "payment",
-        success_url: config.success || "http://localhost:8080/api/products",
-        cancel_url: config.cancel || "http://localhost:8080/current"
+        success_url:  "http://localhost:8080/api/products"||`http://localhost:${process.env.PORT}/api/products`,
+        cancel_url:  "http://localhost:8080/current"||`http://localhost:${process.env.PORT}/api/products` 
     }
 
 
